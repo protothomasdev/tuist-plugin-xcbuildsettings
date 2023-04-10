@@ -24,6 +24,12 @@ If you like to use this plugin, please checkout the [documentation](https://docs
 
 This plugin provides an extension for `ProjectDescription.SettingsDictionary` to initialize the dictionary with Enum cases of the settings you want.
 
+First you need to import the Plugin:
+
+```Swift
+import TuistXCBuildSettings
+```
+
 You could either use the initializer that takes an array of BuildSettings as a parameter:
 
 ```Swift
