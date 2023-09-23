@@ -2,6 +2,7 @@ import ProjectDescription
 
 public typealias Path = String
 
+// Generated for Xcode version 14.0
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
@@ -730,10 +731,6 @@ public extension SettingsDictionary {
         case infoPlistKeyNSSiriUsageDescription(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSpeechRecognitionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key in the Info.plist file to the value of this build setting.
         case infoPlistKeyNSSpeechRecognitionUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSupportsLiveActivities](https://developer.apple.com/documentation/bundleresources/information_property_list/nssupportsliveactivities) key in the Info.plist file to the value of this build setting.
-        case infoPlistKeyNSSupportsLiveActivities(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSupportsLiveActivitiesFrequentUpdates](https://developer.apple.com/documentation/bundleresources/information_property_list/nssupportsliveactivitiesfrequentupdates) key in the Info.plist file to the value of this build setting.
-        case infoPlistKeyNSSupportsLiveActivitiesFrequentUpdates(_ bool: Bool)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSystemAdministrationUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssystemadministrationusagedescription) key in the Info.plist file to the value of this build setting.
         case infoPlistKeyNSSystemAdministrationUsageDescription(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSSystemExtensionUsageDescription key in the Info.plist file to the value of this build setting.
@@ -2538,10 +2535,6 @@ public extension SettingsDictionary {
                     return ("INFOPLIST_KEY_NSSiriUsageDescription", .string(value))
                 case .infoPlistKeyNSSpeechRecognitionUsageDescription(let value):
                     return ("INFOPLIST_KEY_NSSpeechRecognitionUsageDescription", .string(value))
-                case .infoPlistKeyNSSupportsLiveActivities(let value):
-                    return ("INFOPLIST_KEY_NSSupportsLiveActivities", .init(booleanLiteral: value))
-                case .infoPlistKeyNSSupportsLiveActivitiesFrequentUpdates(let value):
-                    return ("INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates", .init(booleanLiteral: value))
                 case .infoPlistKeyNSSystemAdministrationUsageDescription(let value):
                     return ("INFOPLIST_KEY_NSSystemAdministrationUsageDescription", .string(value))
                 case .infoPlistKeyNSSystemExtensionUsageDescription(let value):
@@ -4343,6 +4336,7 @@ public extension SettingsDictionary {
 
 }
 
+
 extension SettingsDictionary: ExpressibleByArrayLiteral {
 
     public init(buildSettings: [XcodeBuildSetting]) {
@@ -4360,7 +4354,7 @@ extension SettingsDictionary: ExpressibleByArrayLiteral {
         buildSettings.forEach { newDict[$0.info.key] = $0.info.value }
         return newDict
     }
-    
+
     mutating public func extending(with buildSettings: [XcodeBuildSetting]) {
         buildSettings.forEach { self[$0.info.key] = $0.info.value }
     }
