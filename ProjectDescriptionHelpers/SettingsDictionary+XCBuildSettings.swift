@@ -2,7 +2,7 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 15.0.1
+// Generated for Xcode version 15.1
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
@@ -453,6 +453,7 @@ public extension SettingsDictionary {
         case embeddedContentContainsSwift(_ bool: Bool = false)
         /// Embed all the built asset packs inside the product bundle. Since this negates the performance benefits of the On Demand Resources feature, it is only useful for testing purposes when it isn't practical to use an asset pack server.
         case embedAssetPacksInProductBundle(_ bool: Bool = false)
+        case enableAppintentsDeploymentAwareProcessing(_ bool: Bool = false)
         case enableAppleKEXTCodeGeneration(_ bool: Bool = false)
         case enableAppSandbox(_ bool: Bool = false)
         case enableBitcode(_ bool: Bool = false)
@@ -912,6 +913,7 @@ public extension SettingsDictionary {
         case ldOptimizationLevel(_ value: String = "$(GCC_OPTIMIZATION_LEVEL)")
         case ldQuoteLinkerArgumentsForCompilerDriver(_ bool: Bool = true)
         case ldRunpathSearchPaths(_ paths: [Path] = [])
+        case ldSuppressWarnings(_ bool: Bool = false)
         case ldTargetTripleArchs(_ values: [String] = ["$(CURRENT_ARCH)"])
         case ldTargetTripleVariants(_ values: [String])
         case ldThreadSanitizer(_ bool: Bool = false)
@@ -1241,6 +1243,7 @@ public extension SettingsDictionary {
         case supportedPlatforms(_ values: [String] = [])
         /// Enable to indicate that the target supports `Text-Based InstallAPI`, which will enable its generation during `install` builds.
         case supportsTextBasedAPI(_ bool: Bool = false)
+        case suppressWarnings(_ bool: Bool = false)
         /// A list of compilation conditions to enable for conditional compilation expressions.
         case swiftActiveCompilationConditions(_ values: [String] = [])
         case swiftAddressSanitizer(_ bool: Bool = false)
@@ -2254,6 +2257,8 @@ public extension SettingsDictionary {
                     return ("EMBEDDED_CONTENT_CONTAINS_SWIFT", .init(booleanLiteral: value))
                 case .embedAssetPacksInProductBundle(let value):
                     return ("EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE", .init(booleanLiteral: value))
+                case .enableAppintentsDeploymentAwareProcessing(let value):
+                    return ("ENABLE_APPINTENTS_DEPLOYMENT_AWARE_PROCESSING", .init(booleanLiteral: value))
                 case .enableAppleKEXTCodeGeneration(let value):
                     return ("ENABLE_APPLE_KEXT_CODE_GENERATION", .init(booleanLiteral: value))
                 case .enableAppSandbox(let value):
@@ -2918,6 +2923,8 @@ public extension SettingsDictionary {
                     return ("LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER", .init(booleanLiteral: value))
                 case .ldRunpathSearchPaths(let value):
                     return ("LD_RUNPATH_SEARCH_PATHS", .array(value))
+                case .ldSuppressWarnings(let value):
+                    return ("LD_SUPPRESS_WARNINGS", .init(booleanLiteral: value))
                 case .ldTargetTripleArchs(let value):
                     return ("LD_TARGET_TRIPLE_ARCHS", .array(value))
                 case .ldTargetTripleVariants(let value):
@@ -3508,6 +3515,8 @@ public extension SettingsDictionary {
                     return ("SUPPORTED_PLATFORMS", .array(value))
                 case .supportsTextBasedAPI(let value):
                     return ("SUPPORTS_TEXT_BASED_API", .init(booleanLiteral: value))
+                case .suppressWarnings(let value):
+                    return ("SUPPRESS_WARNINGS", .init(booleanLiteral: value))
                 case .swiftActiveCompilationConditions(let value):
                     return ("SWIFT_ACTIVE_COMPILATION_CONDITIONS", .array(value))
                 case .swiftAddressSanitizer(let value):
