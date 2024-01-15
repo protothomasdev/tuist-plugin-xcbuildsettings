@@ -2,16 +2,16 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 14.2
+// Generated for Xcode version 14.3
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
         /// A string identifying the build system action being performed.
         case action(_ value: String = "")
-        case additionalSdks(_ values: [String] = [])
+        case additionalSDKs(_ values: [String] = [])
         /// If enabled, allows targets to build multiple times within a single build operation. Targets will build for the platform of the active run destination, as well as the platforms of any targets which depend on them.
         case allowTargetPlatformSpecialization(_ bool: Bool = false)
-        case allOtherLdflags(_ values: [String] = ["$(LD_FLAGS)", "$(SECTORDER_FLAGS)", "$(OTHER_LDFLAGS)", "$(OTHER_LDFLAGS_$(variant))", "$(OTHER_LDFLAGS_$(arch))", "$(OTHER_LDFLAGS_$(variant)_$(arch))", "$(PRODUCT_SPECIFIC_LDFLAGS)"])
+        case allOtherLDFlags(_ values: [String] = ["$(LD_FLAGS)", "$(SECTORDER_FLAGS)", "$(OTHER_LDFLAGS)", "$(OTHER_LDFLAGS_$(variant))", "$(OTHER_LDFLAGS_$(arch))", "$(OTHER_LDFLAGS_$(variant)_$(arch))", "$(PRODUCT_SPECIFIC_LDFLAGS)"])
         case allOtherLIBToolFlags(_ values: [String] = ["$(OTHER_LIBTOOLFLAGS)", "$(OTHER_LIBTOOLFLAGS_$(variant))", "$(OTHER_LIBTOOLFLAGS_$(arch))", "$(OTHER_LIBTOOLFLAGS_$(variant)_$(arch))", "$(PRODUCT_SPECIFIC_LIBTOOLFLAGS)"])
         case alternateGroup(_ value: String = "$(INSTALL_GROUP)")
         case alternateLinker(_ value: String)
@@ -73,10 +73,10 @@ public extension SettingsDictionary {
         case assetCatalogWarnings(_ bool: Bool = true)
         /// If set to anything other than the empty string, every URL in the `AssetPackManifest.plist` file will consist of this string with the name of the asset pack appended. If not set, the URLs in the `AssetPackManifest.plist` will be formed as appropriate for the build location of the asset packs. The prefix string is not escaped or quoted in any way, so any necessary escaping must be part of the URL string. This setting affects only URLs in the `AssetPackManifest.plist` file — it does not affect where asset packs are built in the local file system.
         case assetPackManifestURLPrefix(_ value: String = "")
-        case additionalcommandlinearguments(_ values: [String])
-        case additionalcontentfilepaths(_ paths: [Path])
-        case additionalinfofilekeys(_ value: String)
-        case additionalinfofilevalues(_ value: String)
+        case additionalCommandLineArguments(_ values: [String])
+        case additionalContentFilePaths(_ paths: [Path])
+        case additionalInfoFileKeys(_ value: String)
+        case additionalInfoFileValues(_ value: String)
         case bitcodeGenerationMode(_ value: BitcodeGenerationModeValue = .marker)
         case buildActiveResourcesOnly(_ bool: Bool = false)
         /// A list of components being built during this action.
@@ -111,7 +111,6 @@ public extension SettingsDictionary {
         case clangAddressSanitizerUseAfterScope(_ bool: Bool = false)
         /// Enabling this setting allows non-modular includes to be used from within framework modules. This is inherently unsafe, as such headers might cause duplicate definitions when used by any client that imports both the framework and the non-modular includes.
         case clangAllowNonModularIncludesInFrameworkModules(_ bool: Bool = false)
-        case clangAnalyzerAlternateEdges(_ bool: Bool = true)
         case clangAnalyzerDeadcodeDeadstores(_ bool: Bool = true)
         case clangAnalyzerDefines(_ value: String = "-D__clang_analyzer__")
         case clangAnalyzerDivideByZero(_ bool: Bool = true)
@@ -167,6 +166,7 @@ public extension SettingsDictionary {
         case clangDiagnosticsFile(_ path: Path = "$(MTLCOMPILER_OUTPUT_FILE:dir)$(InputFileBase)$(InputFileBaseUniquefier).dia")
         case clangEnableAppExtension(_ bool: Bool = false)
         case clangEnableBoundsAttributes(_ bool: Bool = false)
+        case clangEnableBoundsSafety(_ bool: Bool = false)
         /// Enables building with code coverage instrumentation. This is only used when the build has code coverage enabled, which is typically done via the Xcode scheme settings.
         case clangEnableCodeCoverage(_ bool: Bool = true)
         case clangEnableCPPStaticDestructors(_ bool: Bool = true)
@@ -303,7 +303,7 @@ public extension SettingsDictionary {
         case compilerIndexStoreEnable(_ value: CompilerIndexStoreEnableValue = .Default)
         case compositeSDKDirs(_ paths: [Path] = ["$(OBJROOT)/CompositeSDKs"])
         /// If enabled, PNG resource files are compressed as they are copied.
-        case compressPngFiles(_ bool: Bool = true)
+        case compressPNGFiles(_ bool: Bool = true)
         case compressTIFFFilesWhileCopying(_ bool: Bool = false)
         /// Identifies the build configuration, such as `Debug` or `Release`, that the target uses to generate the product.
         case configuration(_ value: String = "")
@@ -319,18 +319,18 @@ public extension SettingsDictionary {
         case copyPhaseStrip(_ bool: Bool = true)
         case copyResourcesFromStaticFrameworks(_ bool: Bool = true)
         /// The Source-code language to use for generated CoreML model class.  By default "Automatic" will analyze your project to determine the correct language.  Adjust this setting to explicitly select "Swift" or "Objective-C", or select "None" to disable model class generation.
-        case coremlCodegenLanguage(_ value: CoremlCodegenLanguageValue = .automatic)
+        case coreMLCodegenLanguage(_ value: CoremlCodegenLanguageValue = .automatic)
         /// Generate Swift model classes that are marked with @objc and are descendants of NSObject, in order to be accessible and usable in Objective-C.  This setting has no effect if "CoreML Model Class Generation Language" is set to "Objective-C".
-        case coremlCodegenSwiftGlobalModule(_ bool: Bool = false)
-        case coremlCodegenSwiftVersion(_ value: String = "$(SWIFT_VERSION)")
-        case coremlCompilerContainer(_ value: String = "bundle-resources")
-        case coremlCompilerInfoplistContentFile(_ path: Path = "$(TARGET_TEMP_DIR)/$(InputFileBase)-CoreMLPartialInfo.plist")
-        case coremlDeploymentTarget(_ value: String = "$(COREML_DEPLOYMENT_TARGET__$(IS_MACCATALYST:default=NO))")
-        case coremlDeploymentTargetNo(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
-        case coremlDeploymentTargetYes(_ value: String = "$(IPHONEOS_DEPLOYMENT_TARGET)")
-        case coremlPlatformName(_ value: String = "$(COREML_PLATFORM_NAME__$(IS_MACCATALYST:default=NO))")
-        case coremlPlatformNameNo(_ value: String = "$(SWIFT_PLATFORM_TARGET_PREFIX)")
-        case coremlPlatformNameYes(_ value: String = "maccatalyst")
+        case coreMLCodegenSwiftGlobalModule(_ bool: Bool = false)
+        case coreMLCodegenSwiftVersion(_ value: String = "$(SWIFT_VERSION)")
+        case coreMLCompilerContainer(_ value: String = "bundle-resources")
+        case coreMLCompilerInfoplistContentFile(_ path: Path = "$(TARGET_TEMP_DIR)/$(InputFileBase)-CoreMLPartialInfo.plist")
+        case coreMLDeploymentTarget(_ value: String = "$(COREML_DEPLOYMENT_TARGET__$(IS_MACCATALYST:default=NO))")
+        case coreMLDeploymentTargetNo(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
+        case coreMLDeploymentTargetYes(_ value: String = "$(IPHONEOS_DEPLOYMENT_TARGET)")
+        case coreMLPlatformName(_ value: String = "$(COREML_PLATFORM_NAME__$(IS_MACCATALYST:default=NO))")
+        case coreMLPlatformNameNo(_ value: String = "$(SWIFT_PLATFORM_TARGET_PREFIX)")
+        case coreMLPlatformNameYes(_ value: String = "maccatalyst")
         case cp(_ path: Path = "/bin/cp")
         case cppHeadermapFile(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME).hmap")
         case cppHeadermapFileForAllNonFrameworkTargetHeaders(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME)-all-non-framework-target-headers.hmap")
@@ -350,7 +350,6 @@ public extension SettingsDictionary {
         /// The name of the active variant being processed.
         case currentVariant(_ value: String = "$(variant)")
         case currentVersion(_ value: String = "")
-        case codesignEntitlements(_ bool: Bool)
         case codeSignResourceRules(_ bool: Bool)
         case deadCodeStripping(_ bool: Bool = false)
         case debuggingSymbols(_ bool: Bool = true)
@@ -382,6 +381,7 @@ public extension SettingsDictionary {
         case developmentAssetPaths(_ values: [String] = [])
         case developmentLanguage(_ value: String)
         case developmentTeam(_ value: String = "")
+        case diff(_ path: Path = "/usr/bin/diff")
         case doccAnalyzeDiagnostics(_ bool: Bool = false)
         case doccArchivePath(_ value: String = "$(DOCC_OUTPUT_DIR)/$(DOCC_CATALOG_DISPLAY_NAME).doccarchive")
         case doccCatalogDisplayName(_ value: String = "$(PRODUCT_NAME)")
@@ -440,7 +440,16 @@ public extension SettingsDictionary {
         /// If enabled, the product will be built with options appropriate for supporting previews.
         case enablePreviews(_ bool: Bool)
         case enableStrictOBJCMSGSEND(_ bool: Bool = false)
-        /// When this setting is activated, the product will be built with options appropriate for running automated tests, such as making private interfaces accessible to the tests. This may result in tests running slower than they would without testability enabled.
+        /// Enabling this setting will build the target with options appropriate for running automated tests against its product.
+        ///
+        /// This setting can be enabled when building targets for debugging if their products will be tested. This may result in tests running slower than otherwise.
+        ///
+        /// When this setting is enabled:
+        ///
+        /// * `GCC_SYMBOLS_PRIVATE_EXTERN` is disabled (`-fvisibility=hidden` will not be passed to `clang`).
+        /// * `-enable-testing` is passed to the Swift compiler.
+        /// * `-export_dynamic` is passed to the linker.
+        /// * `STRIP_INSTALLED_PRODUCT` is disabled (`strip` will not be run on the produced binary).
         case enableTestability(_ bool: Bool = false)
         /// Specifies whether the build system should add the search paths necessary for compiling and linking against XCTest. This setting is enabled by default if the target is a unit test target or if the target explicitly links to the XCTest framework.
         case enableTestingSearchPaths(_ bool: Bool = false)
@@ -459,6 +468,8 @@ public extension SettingsDictionary {
         /// Identifies the directory that contains the binary the target builds.
         case executableFolderPath(_ path: Path = "")
         /// Specifies the name of the binary the target produces.
+        ///
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CFBundleExecutable](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleexecutable) key in the `Info.plist` file to the value of this build setting.
         case executableName(_ value: String = "")
         /// Specifies the path to the binary the target produces within its bundle.
         case executablePath(_ path: Path = "")
@@ -510,7 +521,6 @@ public extension SettingsDictionary {
         case gccInputFiletype(_ value: GccInputFiletypeValue = .automatic)
         case gccInstrumentProgramFlowARCS(_ bool: Bool = false)
         case gccLinkWithDynamicLibraries(_ bool: Bool = true)
-        case gccMacOSXVersionMin(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         case gccNoCommonBlocks(_ bool: Bool = false)
         case gccOBJCABIVersion(_ value: GccObjcAbiVersionValue)
         case gccOBJCLegacyDispatch(_ bool: Bool = false)
@@ -571,13 +581,15 @@ public extension SettingsDictionary {
         case generatedModulemapDir(_ value: String = "$(OBJROOT)/GeneratedModuleMaps$(EFFECTIVE_PLATFORM_NAME)")
         /// Automatically generate an Info.plist file.
         case generateInfoplistFile(_ bool: Bool = false)
+        /// Enables the generation of intermediate Text-Based stubs for dynamic libraries and frameworks to more precisely track linker dependencies in incremental builds.
+        case generateIntermediateTextBasedStubs(_ bool: Bool = true)
         case generateMasterObjectFile(_ bool: Bool = false)
         case generatePkginfoFile(_ bool: Bool = false)
         case generateProfilingCode(_ bool: Bool)
         /// Enables the generation of Text-Based stubs for dynamic libraries and frameworks.
         case generateTextBasedStubs(_ bool: Bool = false)
-        case globalCFLAGS(_ values: [String] = [])
-        case generatedPKGInfoFile(_ path: Path)
+        case globalCFlags(_ values: [String] = [])
+        case generatedPkgInfoFile(_ path: Path)
         case headermapFileFormat(_ value: HeadermapFileFormatValue = .traditional)
         /// Specifies whether the header map contains a name/path entry for every header in the target being built.
         case headermapIncludesFlatEntriesForTargetBeingBuilt(_ bool: Bool = true)
@@ -627,161 +639,161 @@ public extension SettingsDictionary {
         case includedSourceFileNames(_ values: [String] = [])
         case infoplistExpandBuildSettings(_ bool: Bool = true)
         case infoplistFile(_ value: String = "")
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CFBundleDisplayName](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundledisplayname) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CFBundleDisplayName](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundledisplayname) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyCFBundleDisplayName(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CLKComplicationPrincipalClass](https://developer.apple.com/documentation/bundleresources/information_property_list/clkcomplicationprincipalclass) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CLKComplicationPrincipalClass](https://developer.apple.com/documentation/bundleresources/information_property_list/clkcomplicationprincipalclass) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyCLKComplicationPrincipalClass(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSApplicationCategoryType](https://developer.apple.com/documentation/bundleresources/information_property_list/lsapplicationcategorytype) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSApplicationCategoryType](https://developer.apple.com/documentation/bundleresources/information_property_list/lsapplicationcategorytype) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyLSApplicationCategoryType(_ value: InfoplistKeyLsapplicationcategorytypeValue)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSBackgroundOnly](https://developer.apple.com/documentation/bundleresources/information_property_list/lsbackgroundonly) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSBackgroundOnly](https://developer.apple.com/documentation/bundleresources/information_property_list/lsbackgroundonly) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyLSBackgroundOnly(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSSupportsOpeningDocumentsInPlace](https://developer.apple.com/documentation/bundleresources/information_property_list/lssupportsopeningdocumentsinplace) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSSupportsOpeningDocumentsInPlace](https://developer.apple.com/documentation/bundleresources/information_property_list/lssupportsopeningdocumentsinplace) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyLSSupportsOpeningDocumentsInPlace(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSUIElement](https://developer.apple.com/documentation/bundleresources/information_property_list/lsuielement) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSUIElement](https://developer.apple.com/documentation/bundleresources/information_property_list/lsuielement) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyLSUIElement(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the MetalCaptureEnabled key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the MetalCaptureEnabled key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyMetalCaptureEnabled(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NFCReaderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NFCReaderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNFCReaderUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSAppleEventsUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsappleeventsusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSAppleEventsUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsappleeventsusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSAppleEventsUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSAppleMusicUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsapplemusicusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSAppleMusicUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsapplemusicusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSAppleMusicUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSBluetoothAlwaysUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSBluetoothAlwaysUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSBluetoothAlwaysUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSBluetoothPeripheralUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothperipheralusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSBluetoothPeripheralUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothperipheralusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSBluetoothPeripheralUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSBluetoothWhileInUseUsageDescription key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSBluetoothWhileInUseUsageDescription key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSBluetoothWhileInUseUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSCalendarsUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscalendarsusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSCalendarsUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscalendarsusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSCalendarsUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSCameraUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSCameraUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSCameraUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSContactsUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscontactsusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSContactsUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nscontactsusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSContactsUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSDesktopFolderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsdesktopfolderusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSDesktopFolderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsdesktopfolderusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSDesktopFolderUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSDocumentsFolderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsdocumentsfolderusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSDocumentsFolderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsdocumentsfolderusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSDocumentsFolderUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSDownloadsFolderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsdownloadsfolderusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSDownloadsFolderUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsdownloadsfolderusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSDownloadsFolderUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSFaceIDUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsfaceidusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSFaceIDUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsfaceidusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSFaceIDUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSFallDetectionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsfalldetectionusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSFallDetectionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsfalldetectionusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSFallDetectionUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSFileProviderDomainUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsfileproviderdomainusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSFileProviderDomainUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsfileproviderdomainusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSFileProviderDomainUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSFileProviderPresenceUsageDescription key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSFileProviderPresenceUsageDescription key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSFileProviderPresenceUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSFocusStatusUsageDescription key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSFocusStatusUsageDescription key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSFocusStatusUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSGKFriendListUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsgkfriendlistusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSGKFriendListUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsgkfriendlistusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSGKFriendListUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHealthClinicalHealthRecordsShareUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthclinicalhealthrecordsshareusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHealthClinicalHealthRecordsShareUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthclinicalhealthrecordsshareusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSHealthClinicalHealthRecordsShareUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHealthShareUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthshareusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHealthShareUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthshareusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSHealthShareUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHealthUpdateUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthupdateusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHealthUpdateUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthupdateusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSHealthUpdateUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHomeKitUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshomekitusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHomeKitUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nshomekitusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSHomeKitUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHumanReadableCopyright](https://developer.apple.com/documentation/bundleresources/information_property_list/nshumanreadablecopyright) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHumanReadableCopyright](https://developer.apple.com/documentation/bundleresources/information_property_list/nshumanreadablecopyright) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSHumanReadableCopyright(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocalNetworkUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocalnetworkusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocalNetworkUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocalnetworkusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocalNetworkUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationAlwaysAndWhenInUseUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysandwheninuseusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationAlwaysAndWhenInUseUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysandwheninuseusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocationAlwaysAndWhenInUseUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationAlwaysUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationAlwaysUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocationAlwaysUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationTemporaryUsageDescriptionDictionary](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationtemporaryusagedescriptiondictionary) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationTemporaryUsageDescriptionDictionary](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationtemporaryusagedescriptiondictionary) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocationTemporaryUsageDescriptionDictionary(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocationUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationWhenInUseUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationwheninuseusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationWhenInUseUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationwheninuseusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocationWhenInUseUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMainNibFile](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmainnibfile) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMainNibFile](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmainnibfile) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSMainNibFile(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMainStoryboardFile](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmainstoryboardfile) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMainStoryboardFile](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmainstoryboardfile) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSMainStoryboardFile(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMicrophoneUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMicrophoneUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSMicrophoneUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMotionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmotionusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSMotionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmotionusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSMotionUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSNearbyInteractionAllowOnceUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsnearbyinteractionallowonceusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSNearbyInteractionAllowOnceUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsnearbyinteractionallowonceusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSNearbyInteractionAllowOnceUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSNearbyInteractionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsnearbyinteractionusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSNearbyInteractionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsnearbyinteractionusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSNearbyInteractionUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSNetworkVolumesUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsnetworkvolumesusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSNetworkVolumesUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsnetworkvolumesusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSNetworkVolumesUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSPhotoLibraryAddUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryaddusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSPhotoLibraryAddUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryaddusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSPhotoLibraryAddUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSPhotoLibraryUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSPhotoLibraryUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSPhotoLibraryUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSPrincipalClass](https://developer.apple.com/documentation/bundleresources/information_property_list/nsprincipalclass) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSPrincipalClass](https://developer.apple.com/documentation/bundleresources/information_property_list/nsprincipalclass) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSPrincipalClass(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSRemindersUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsremindersusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSRemindersUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsremindersusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSRemindersUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSRemovableVolumesUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsremovablevolumesusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSRemovableVolumesUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsremovablevolumesusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSRemovableVolumesUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSensorKitPrivacyPolicyURL](https://developer.apple.com/documentation/bundleresources/information_property_list/nssensorkitprivacypolicyurl) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSensorKitPrivacyPolicyURL](https://developer.apple.com/documentation/bundleresources/information_property_list/nssensorkitprivacypolicyurl) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSensorKitPrivacyPolicyURL(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSensorKitUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssensorkitusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSensorKitUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssensorkitusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSensorKitUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSiriUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssiriusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSiriUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssiriusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSiriUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSpeechRecognitionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSpeechRecognitionUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSpeechRecognitionUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSupportsLiveActivities](https://developer.apple.com/documentation/bundleresources/information_property_list/nssupportsliveactivities) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSupportsLiveActivities](https://developer.apple.com/documentation/bundleresources/information_property_list/nssupportsliveactivities) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSupportsLiveActivities(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSupportsLiveActivitiesFrequentUpdates](https://developer.apple.com/documentation/bundleresources/information_property_list/nssupportsliveactivitiesfrequentupdates) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSupportsLiveActivitiesFrequentUpdates](https://developer.apple.com/documentation/bundleresources/information_property_list/nssupportsliveactivitiesfrequentupdates) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSupportsLiveActivitiesFrequentUpdates(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSystemAdministrationUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssystemadministrationusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSSystemAdministrationUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nssystemadministrationusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSystemAdministrationUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSSystemExtensionUsageDescription key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSSystemExtensionUsageDescription key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSSystemExtensionUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSUserTrackingUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsusertrackingusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSUserTrackingUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsusertrackingusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSUserTrackingUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSVideoSubscriberAccountUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsvideosubscriberaccountusagedescription) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSVideoSubscriberAccountUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsvideosubscriberaccountusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSVideoSubscriberAccountUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSVoIPUsageDescription key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the NSVoIPUsageDescription key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSVoIPUsageDescription(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the OSBundleUsageDescription key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the OSBundleUsageDescription key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyOSBundleUsageDescription(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIApplicationSceneManifest](https://developer.apple.com/documentation/bundleresources/information_property_list/uiapplicationscenemanifest) key in the Info.plist file to an entry suitable for a multi-window application.
         case infoPlistKeyUIApplicationSceneManifestGeneration(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIApplicationSupportsIndirectInputEvents](https://developer.apple.com/documentation/bundleresources/information_property_list/uiapplicationsupportsindirectinputevents) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIApplicationSupportsIndirectInputEvents](https://developer.apple.com/documentation/bundleresources/information_property_list/uiapplicationsupportsindirectinputevents) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIApplicationSupportsIndirectInputEvents(_ bool: Bool)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UILaunchScreen](https://developer.apple.com/documentation/bundleresources/information_property_list/uilaunchscreen) key in the Info.plist file to an empty dictionary.
         case infoPlistKeyUILaunchScreenGeneration(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UILaunchStoryboardName](https://developer.apple.com/documentation/bundleresources/information_property_list/uilaunchstoryboardname) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UILaunchStoryboardName](https://developer.apple.com/documentation/bundleresources/information_property_list/uilaunchstoryboardname) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUILaunchStoryboardName(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIMainStoryboardFile](https://developer.apple.com/documentation/bundleresources/information_property_list/uimainstoryboardfile) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIMainStoryboardFile](https://developer.apple.com/documentation/bundleresources/information_property_list/uimainstoryboardfile) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIMainStoryboardFile(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIRequiredDeviceCapabilities](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequireddevicecapabilities) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIRequiredDeviceCapabilities](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequireddevicecapabilities) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIRequiredDeviceCapabilities(_ values: [String])
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIRequiresFullScreen](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequiresfullscreen) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIRequiresFullScreen](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequiresfullscreen) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIRequiresFullScreen(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIStatusBarHidden](https://developer.apple.com/documentation/bundleresources/information_property_list/uistatusbarhidden) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIStatusBarHidden](https://developer.apple.com/documentation/bundleresources/information_property_list/uistatusbarhidden) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIStatusBarHidden(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIStatusBarStyle](https://developer.apple.com/documentation/bundleresources/information_property_list/uistatusbarstyle) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIStatusBarStyle](https://developer.apple.com/documentation/bundleresources/information_property_list/uistatusbarstyle) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIStatusBarStyle(_ value: InfoplistKeyUistatusbarstyleValue)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportedInterfaceOrientations](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportedInterfaceOrientations](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUISupportedInterfaceOrientations(_ values: [String])
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportedInterfaceOrientations~iPad](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportedInterfaceOrientations~iPad](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUISupportedInterfaceOrientationsiPad(_ values: [String])
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportedInterfaceOrientations~iPhone](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportedInterfaceOrientations~iPhone](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUISupportedInterfaceOrientationsiPhone(_ values: [String])
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportsDocumentBrowser](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportsdocumentbrowser) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UISupportsDocumentBrowser](https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportsdocumentbrowser) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUISupportsDocumentBrowser(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIUserInterfaceStyle](https://developer.apple.com/documentation/bundleresources/information_property_list/uiuserinterfacestyle) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [UIUserInterfaceStyle](https://developer.apple.com/documentation/bundleresources/information_property_list/uiuserinterfacestyle) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyUIUserInterfaceStyle(_ value: InfoplistKeyUiuserinterfacestyleValue)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKCompanionAppBundleIdentifier](https://developer.apple.com/documentation/bundleresources/information_property_list/wkcompanionappbundleidentifier) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKCompanionAppBundleIdentifier](https://developer.apple.com/documentation/bundleresources/information_property_list/wkcompanionappbundleidentifier) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyWKCompanionAppBundleIdentifier(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKExtensionDelegateClassName](https://developer.apple.com/documentation/bundleresources/information_property_list/wkextensiondelegateclassname) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKExtensionDelegateClassName](https://developer.apple.com/documentation/bundleresources/information_property_list/wkextensiondelegateclassname) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyWKExtensionDelegateClassName(_ value: String)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKRunsIndependentlyOfCompanionApp](https://developer.apple.com/documentation/bundleresources/information_property_list/wkrunsindependentlyofcompanionapp) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKRunsIndependentlyOfCompanionApp](https://developer.apple.com/documentation/bundleresources/information_property_list/wkrunsindependentlyofcompanionapp) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyWKRunsIndependentlyOfCompanionApp(_ bool: Bool)
-        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKWatchOnly](https://developer.apple.com/documentation/bundleresources/information_property_list/wkwatchonly) key in the Info.plist file to the value of this build setting.
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKWatchOnly](https://developer.apple.com/documentation/bundleresources/information_property_list/wkwatchonly) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyWKWatchOnly(_ bool: Bool)
         case infoplistOtherPreprocessorFlags(_ values: [String] = [])
         case infoplistOutputFormat(_ value: InfoplistOutputFormatValue = .sameAsInput)
@@ -829,13 +841,13 @@ public extension SettingsDictionary {
         case javaZipFlags(_ values: [String] = ["-urg"])
         case jikesDefaultFlags(_ values: [String] = ["+E", "+OLDCSO"])
         case keepPrivateExterns(_ bool: Bool = false)
-        case kextCFLAGS(_ values: [String] = [])
+        case kextCFlags(_ values: [String] = [])
         case kextCPlusPlusFlags(_ values: [String] = ["$(KEXT_CFLAGS)"])
         case ldAdditionalDeploymentTargetFlags(_ values: [String])
         case ldBitcodeGenerationMode(_ value: LdBitcodeGenerationModeValue)
         case ldDebugVariant(_ bool: Bool = true)
         case ldDependencyInfoFile(_ path: Path = "$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/$(CURRENT_ARCH)/$(PRODUCT_NAME)_dependency_info.dat")
-        case ldDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
+        case ldDeterministicMode(_ bool: Bool = true)
         case ldDontRunDeduplication(_ bool: Bool = true)
         case ldDYLIBAllowableClients(_ values: [String] = [])
         case ldDYLIBInstallName(_ path: Path = "")
@@ -887,9 +899,11 @@ public extension SettingsDictionary {
         case llvmTargetTripleOSVersion(_ value: String = "$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         case llvmTargetTripleSuffix(_ value: String = "")
         case llvmTargetTripleVendor(_ value: String = "apple")
+        case lmAuxConstMetadataFiles(_ values: [String] = [])
         case lmBinaryPath(_ value: String = "")
         case lmDependencyFiles(_ values: [String] = [])
         case lmEnableLinkGeneration(_ bool: Bool = true)
+        case lmSourceFiles(_ values: [String] = [])
         case lmStringsdataFiles(_ values: [String] = [])
         case localizableContentDir(_ path: Path = "")
         /// When enabled, localizable content in this target/project can be exported.
@@ -987,26 +1001,26 @@ public extension SettingsDictionary {
         case openCLOptimizationLevel(_ value: OpenclOptimizationLevelValue = .s)
         case openCLOtherBCFlags(_ values: [String])
         case openCLPreprocessorDefinitions(_ values: [String])
-        case optimizationCFLAGS(_ values: [String] = [])
+        case optimizationCFlags(_ values: [String] = [])
         case orderFile(_ path: Path = "")
         case osac(_ path: Path = "/usr/bin/osacompile")
         case osacompileExecuteOnly(_ bool: Bool = false)
-        case otherCFLAGS(_ values: [String])
+        case otherCFlags(_ values: [String])
         case otherCodeSignFlags(_ values: [String] = [])
         case otherCPlusPlusFlags(_ values: [String] = ["$(OTHER_CFLAGS)"])
         /// A list of additional flags to pass to DocC
         case otherDocCFlags(_ values: [String])
         /// Space-separated list of additional flags to pass to the `iig` invocation of clang. Be sure to backslash-escape any arguments that contain spaces or special characters, such as path names that may contain spaces. Use this setting if Xcode does not already provide UI for a particular `iig` flag
-        case otherIIGCFLAGS(_ values: [String] = [])
+        case otherIIGCFlags(_ values: [String] = [])
         /// Space-separated list of additional flags to pass to the `iig` compiler. Be sure to backslash-escape any arguments that contain spaces or special characters, such as path names that may contain spaces. Use this setting if Xcode does not already provide UI for a particular `iig` flag
         case otherIIGFlags(_ values: [String] = [])
-        case otherLdflags(_ values: [String] = [])
+        case otherLDFlags(_ values: [String] = [])
         case otherLDRFlags(_ values: [String] = ["$(OTHER_LDFLAGS)"])
         case otherLIBToolFlags(_ values: [String] = [])
         case otherMIGFlags(_ values: [String] = [])
         case otherOSACompileFlags(_ values: [String] = [])
         case otherOSAFlags(_ values: [String] = [])
-        case otherPrecompCFLAGS(_ values: [String] = [])
+        case otherPrecompCFlags(_ values: [String] = [])
         case otherRCProjectFlags(_ values: [String] = [])
         case otherRESMergerFlags(_ values: [String] = [])
         case otherREZFlags(_ values: [String] = [])
@@ -1039,7 +1053,7 @@ public extension SettingsDictionary {
         case precompilePrefixHeader(_ bool: Bool = false)
         case precompsIncludeHeadersFromBuiltProductsDir(_ bool: Bool = true)
         case precompDestinationDir(_ path: Path = "$(TARGET_TEMP_DIR)/PrefixHeaders")
-        case prefixCflagBase(_ value: String = "")
+        case prefixCFlagBase(_ value: String = "")
         case prefixFlags(_ values: [String] = [])
         case prefixHeader(_ path: Path = "")
         case prefixReference(_ value: String = "")
@@ -1047,7 +1061,9 @@ public extension SettingsDictionary {
         case prelinkLibs(_ values: [String] = [])
         case preserveDeadCodeInitsAndTerms(_ bool: Bool = false)
         case privateHeadersFolderPath(_ value: String = "")
-        /// A string that uniquely identifies the bundle. The string should be in reverse DNS format using only alphanumeric characters (`A-Z`, `a-z`, `0-9`), the dot (`.`), and the hyphen (`-`). This value is used as the `CFBundleIdentifier` in the `Info.plist` of the built bundle.
+        /// A string that uniquely identifies the bundle. The string should be in reverse DNS format using only alphanumeric characters (`A-Z`, `a-z`, `0-9`), the dot (`.`), and the hyphen (`-`).
+        ///
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CFBundleIdentifier](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier) key in the `Info.plist` file to the value of this build setting.
         case productBundleIdentifier(_ value: String = "")
         case productModuleName(_ value: String = "$(PRODUCT_NAME:c99extidentifier)")
         case productName(_ value: String = "")
@@ -1116,6 +1132,7 @@ public extension SettingsDictionary {
         case scriptsFolderPath(_ path: Path = "")
         case sdkdbToSymgraphExec(_ path: Path = "$(DEVELOPER_DIR)/../SharedFrameworks/CoreDocumentation.framework/Resources/sdkdb_to_symgraph")
         case sdkroot(_ path: Path)
+        case sdkStatCacheEnable(_ bool: Bool = true)
         case sectOrderFlags(_ values: [String] = [])
         case sed(_ path: Path = "/usr/bin/sed")
         case separateStrip(_ bool: Bool = false)
@@ -1145,9 +1162,10 @@ public extension SettingsDictionary {
         case stringsFileOutputFilename(_ value: String = "$(InputFileName)")
         case stripflags(_ values: [String])
         case stripBitcodeFromCopiedFiles(_ bool: Bool = false)
+        case stripDeterministicMode(_ bool: Bool = true)
         case stripInstalledProduct(_ bool: Bool = true)
         /// Metadata in the form of text chunks in PNG files will be removed to reduce their footprint on disk.
-        case stripPngText(_ bool: Bool = true)
+        case stripPNGText(_ bool: Bool = true)
         case stripStyle(_ value: StripStyleValue)
         case stripSwiftSymbols(_ bool: Bool)
         case supportedPlatforms(_ values: [String] = [])
@@ -1163,6 +1181,8 @@ public extension SettingsDictionary {
         case swiftDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         /// Disable runtime safety checks when optimizing.
         case swiftDisableSafetyChecks(_ bool: Bool = false)
+        /// A list of protocol names whose conformances the Swift compiler is to emit compile-time-known values for.
+        case swiftEmitConstValueProtocols(_ values: [String] = [])
         /// When enabled, the Swift compiler will be used to extract Swift string literal and interpolation `LocalizedStringKey` and `LocalizationKey` types during localization export.
         case swiftEmitLOCStrings(_ bool: Bool = false)
         case swiftEmitModuleInterface(_ bool: Bool = false)
@@ -1170,6 +1190,8 @@ public extension SettingsDictionary {
         /// Enable the use of forward slash regular-expression literal syntax (-enable-bare-slash-regex)
         case swiftEnableBareSlashRegex(_ bool: Bool = true)
         case swiftEnableBatchMode(_ bool: Bool = true)
+        /// Emit the extracted compile-time known values from the Swift compiler (-emit-const-values)
+        case swiftEnableEmitConstValues(_ bool: Bool = false)
         case swiftEnableIncrementalCompilation(_ bool: Bool = true)
         case swiftEnableLibraryEvolution(_ bool: Bool = false)
         case swiftEnableTestability(_ bool: Bool = false)
@@ -1247,8 +1269,8 @@ public extension SettingsDictionary {
         case systemKEXTInstallPath(_ value: String = "$(SYSTEM_LIBRARY_DIR)/Extensions")
         case signingCert(_ value: String)
         case tapiApplicationExtensionAPIOnly(_ bool: Bool = false)
-        case tapiArchs(_ values: [String] = ["$(ARCHS)"])
-        case tapiDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
+        /// Display demangled symbols when building `Text-Based InstallAPI`.
+        case tapiDemangle(_ bool: Bool = true)
         case tapiDYLIBAllowableClients(_ values: [String] = ["$(LD_DYLIB_ALLOWABLE_CLIENTS)"])
         case tapiDYLIBCompatibilityVersion(_ path: Path = "$(DYLIB_COMPATIBILITY_VERSION)")
         case tapiDYLIBCurrentVersion(_ path: Path = "$(DYLIB_CURRENT_VERSION)")
@@ -1258,6 +1280,12 @@ public extension SettingsDictionary {
         /// Include project-level headers when building `Text-Based InstallAPI`.
         case tapiEnableProjectHeaders(_ bool: Bool = false)
         case tapiEnableVerificationMode(_ bool: Bool = true)
+        /// Remove private-level headers from target when building `Text-Based InstallAPI`.
+        case tapiExcludePrivateHeaders(_ values: [String] = [])
+        /// Remove project-level headers from target when building `Text-Based InstallAPI`.
+        case tapiExcludeProjectHeaders(_ values: [String] = [])
+        /// Remove public-level headers from target when building `Text-Based InstallAPI`.
+        case tapiExcludePublicHeaders(_ values: [String] = [])
         case tapiExec(_ path: Path = "tapi")
         case tapiExtractAPIEnableModules(_ bool: Bool = false)
         case tapiExtractAPIEnableOBJCARC(_ bool: Bool = false)
@@ -1267,9 +1295,19 @@ public extension SettingsDictionary {
         case tapiExtractAPISearchPaths(_ values: [String] = [])
         case tapiExtractAPISystemRoot(_ path: Path = "${SDKROOT}")
         case tapiExtractAPITargetTriple(_ value: String = "$(CURRENT_ARCH)-$(LLVM_TARGET_TRIPLE_VENDOR)-$(LLVM_TARGET_TRIPLE_OS_VERSION)$(LLVM_TARGET_TRIPLE_SUFFIX)")
+        /// Add private-level headers from other targets when building `Text-Based InstallAPI`.
+        case tapiExtraPrivateHeaders(_ values: [String] = [])
+        /// Add project-level headers from other targets when building `Text-Based InstallAPI`.
+        case tapiExtraProjectHeaders(_ values: [String] = [])
+        /// Add public-level headers from other targets when building `Text-Based InstallAPI`.
+        case tapiExtraPublicHeaders(_ values: [String] = [])
         case tapiFrameworkSearchPaths(_ paths: [Path] = ["$(FRAMEWORK_SEARCH_PATHS)"])
         case tapiHeaderSearchPaths(_ paths: [Path] = ["$(HEADER_SEARCH_PATHS)"])
         case tapiInputs(_ paths: [Path])
+        /// Selects the language mode when building `Text-Based InstallAPI`.
+        case tapiLanguage(_ value: TapiLanguageValue = .objectiveC)
+        /// Selects the langauge dialect when building `Text-Based InstallAPI`.
+        case tapiLanguageStandard(_ value: TapiLanguageStandardValue = .compilerDefault)
         case tapiLibrarySearchPaths(_ paths: [Path] = ["$(LIBRARY_SEARCH_PATHS)"])
         case tapiModulesValidateSystemHeaders(_ bool: Bool = false)
         case tapiModuleCachePath(_ value: String = "$(CLANG_MODULE_CACHE_PATH)")
@@ -1303,6 +1341,7 @@ public extension SettingsDictionary {
         case toolchains(_ values: [String])
         case treatMissingBaselinesAsTestFailures(_ bool: Bool = false)
         case unexportedSymbolsFile(_ path: Path)
+        case uninstalledProductsDir(_ path: Path = "$(TEMP_ROOT)/UninstalledProducts")
         case unlocalizedResourcesFolderPath(_ value: String)
         case unstrippedProduct(_ bool: Bool = false)
         case usdzEnableWarnings(_ value: UsdzEnableWarningsValue = .yes)
@@ -1312,10 +1351,6 @@ public extension SettingsDictionary {
         case useGCC3PFESupport(_ bool: Bool = false)
         case useHeadermap(_ bool: Bool = true)
         case useHeaderSYMLINKS(_ bool: Bool = false)
-        case useLLVMTargetTriples(_ bool: Bool = true)
-        case useLLVMTargetTriplesForClang(_ bool: Bool = false)
-        case useLLVMTargetTriplesForLD(_ bool: Bool = false)
-        case useLLVMTargetTriplesForTAPI(_ bool: Bool = false)
         case validatePlistFilesWhileCopying(_ bool: Bool = false)
         case validateProduct(_ bool: Bool = false)
         case validateStringsFilesWhileCopying(_ bool: Bool = true)
@@ -1331,8 +1366,8 @@ public extension SettingsDictionary {
         case versionInfoPrefix(_ value: String = "")
         case versionInfoString(_ value: String = "\"@(#)PROGRAM:$(PRODUCT_NAME)  PROJECT:$(PROJECT_NAME)-$(CURRENT_PROJECT_VERSION)\"")
         case versionInfoSuffix(_ value: String = "")
-        case warningCFLAGS(_ values: [String] = [])
-        case warningLdflags(_ values: [String] = [])
+        case warningCFlags(_ values: [String] = [])
+        case warningLDFlags(_ values: [String] = [])
         case wrapperExtension(_ value: String = "")
         /// Specifies the filename, including the appropriate extension, of the product bundle.
         case wrapperName(_ value: String = "")
@@ -1361,11 +1396,11 @@ public extension SettingsDictionary {
             switch self {
                 case .action(let value):
                     return ("ACTION", .string(value))
-                case .additionalSdks(let value):
+                case .additionalSDKs(let value):
                     return ("ADDITIONAL_SDKS", .array(value))
                 case .allowTargetPlatformSpecialization(let value):
                     return ("ALLOW_TARGET_PLATFORM_SPECIALIZATION", .init(booleanLiteral: value))
-                case .allOtherLdflags(let value):
+                case .allOtherLDFlags(let value):
                     return ("ALL_OTHER_LDFLAGS", .array(value))
                 case .allOtherLIBToolFlags(let value):
                     return ("ALL_OTHER_LIBTOOLFLAGS", .array(value))
@@ -1461,13 +1496,13 @@ public extension SettingsDictionary {
                     return ("ASSETCATALOG_WARNINGS", .init(booleanLiteral: value))
                 case .assetPackManifestURLPrefix(let value):
                     return ("ASSET_PACK_MANIFEST_URL_PREFIX", .string(value))
-                case .additionalcommandlinearguments(let value):
+                case .additionalCommandLineArguments(let value):
                     return ("AdditionalCommandLineArguments", .array(value))
-                case .additionalcontentfilepaths(let value):
+                case .additionalContentFilePaths(let value):
                     return ("AdditionalContentFilePaths", .array(value))
-                case .additionalinfofilekeys(let value):
+                case .additionalInfoFileKeys(let value):
                     return ("AdditionalInfoFileKeys", .string(value))
-                case .additionalinfofilevalues(let value):
+                case .additionalInfoFileValues(let value):
                     return ("AdditionalInfoFileValues", .string(value))
                 case .bitcodeGenerationMode(let value):
                     return ("BITCODE_GENERATION_MODE", .string(value.rawValue))
@@ -1529,8 +1564,6 @@ public extension SettingsDictionary {
                     return ("CLANG_ADDRESS_SANITIZER_USE_AFTER_SCOPE", .init(booleanLiteral: value))
                 case .clangAllowNonModularIncludesInFrameworkModules(let value):
                     return ("CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES", .init(booleanLiteral: value))
-                case .clangAnalyzerAlternateEdges(let value):
-                    return ("CLANG_ANALYZER_ALTERNATE_EDGES", .init(booleanLiteral: value))
                 case .clangAnalyzerDeadcodeDeadstores(let value):
                     return ("CLANG_ANALYZER_DEADCODE_DEADSTORES", .init(booleanLiteral: value))
                 case .clangAnalyzerDefines(let value):
@@ -1641,6 +1674,8 @@ public extension SettingsDictionary {
                     return ("CLANG_ENABLE_APP_EXTENSION", .init(booleanLiteral: value))
                 case .clangEnableBoundsAttributes(let value):
                     return ("CLANG_ENABLE_BOUNDS_ATTRIBUTES", .init(booleanLiteral: value))
+                case .clangEnableBoundsSafety(let value):
+                    return ("CLANG_ENABLE_BOUNDS_SAFETY", .init(booleanLiteral: value))
                 case .clangEnableCodeCoverage(let value):
                     return ("CLANG_ENABLE_CODE_COVERAGE", .init(booleanLiteral: value))
                 case .clangEnableCPPStaticDestructors(let value):
@@ -1879,7 +1914,7 @@ public extension SettingsDictionary {
                     return ("COMPILER_INDEX_STORE_ENABLE", .string(value.rawValue))
                 case .compositeSDKDirs(let value):
                     return ("COMPOSITE_SDK_DIRS", .array(value))
-                case .compressPngFiles(let value):
+                case .compressPNGFiles(let value):
                     return ("COMPRESS_PNG_FILES", .init(booleanLiteral: value))
                 case .compressTIFFFilesWhileCopying(let value):
                     return ("COMPRESS_TIFF_FILES_WHILE_COPYING", .init(booleanLiteral: value))
@@ -1901,27 +1936,27 @@ public extension SettingsDictionary {
                     return ("COPY_PHASE_STRIP", .init(booleanLiteral: value))
                 case .copyResourcesFromStaticFrameworks(let value):
                     return ("COPY_RESOURCES_FROM_STATIC_FRAMEWORKS", .init(booleanLiteral: value))
-                case .coremlCodegenLanguage(let value):
+                case .coreMLCodegenLanguage(let value):
                     return ("COREML_CODEGEN_LANGUAGE", .string(value.rawValue))
-                case .coremlCodegenSwiftGlobalModule(let value):
+                case .coreMLCodegenSwiftGlobalModule(let value):
                     return ("COREML_CODEGEN_SWIFT_GLOBAL_MODULE", .init(booleanLiteral: value))
-                case .coremlCodegenSwiftVersion(let value):
+                case .coreMLCodegenSwiftVersion(let value):
                     return ("COREML_CODEGEN_SWIFT_VERSION", .string(value))
-                case .coremlCompilerContainer(let value):
+                case .coreMLCompilerContainer(let value):
                     return ("COREML_COMPILER_CONTAINER", .string(value))
-                case .coremlCompilerInfoplistContentFile(let value):
+                case .coreMLCompilerInfoplistContentFile(let value):
                     return ("COREML_COMPILER_INFOPLIST_CONTENT_FILE", .string(value))
-                case .coremlDeploymentTarget(let value):
+                case .coreMLDeploymentTarget(let value):
                     return ("COREML_DEPLOYMENT_TARGET", .string(value))
-                case .coremlDeploymentTargetNo(let value):
+                case .coreMLDeploymentTargetNo(let value):
                     return ("COREML_DEPLOYMENT_TARGET__NO", .string(value))
-                case .coremlDeploymentTargetYes(let value):
+                case .coreMLDeploymentTargetYes(let value):
                     return ("COREML_DEPLOYMENT_TARGET__YES", .string(value))
-                case .coremlPlatformName(let value):
+                case .coreMLPlatformName(let value):
                     return ("COREML_PLATFORM_NAME", .string(value))
-                case .coremlPlatformNameNo(let value):
+                case .coreMLPlatformNameNo(let value):
                     return ("COREML_PLATFORM_NAME__NO", .string(value))
-                case .coremlPlatformNameYes(let value):
+                case .coreMLPlatformNameYes(let value):
                     return ("COREML_PLATFORM_NAME__YES", .string(value))
                 case .cp(let value):
                     return ("CP", .string(value))
@@ -1957,8 +1992,6 @@ public extension SettingsDictionary {
                     return ("CURRENT_VARIANT", .string(value))
                 case .currentVersion(let value):
                     return ("CURRENT_VERSION", .string(value))
-                case .codesignEntitlements(let value):
-                    return ("CodeSignEntitlements", .init(booleanLiteral: value))
                 case .codeSignResourceRules(let value):
                     return ("CodeSignResourceRules", .init(booleanLiteral: value))
                 case .deadCodeStripping(let value):
@@ -2015,6 +2048,8 @@ public extension SettingsDictionary {
                     return ("DEVELOPMENT_LANGUAGE", .string(value))
                 case .developmentTeam(let value):
                     return ("DEVELOPMENT_TEAM", .string(value))
+                case .diff(let value):
+                    return ("DIFF", .string(value))
                 case .doccAnalyzeDiagnostics(let value):
                     return ("DOCC_ANALYZE_DIAGNOSTICS", .init(booleanLiteral: value))
                 case .doccArchivePath(let value):
@@ -2217,8 +2252,6 @@ public extension SettingsDictionary {
                     return ("GCC_INSTRUMENT_PROGRAM_FLOW_ARCS", .init(booleanLiteral: value))
                 case .gccLinkWithDynamicLibraries(let value):
                     return ("GCC_LINK_WITH_DYNAMIC_LIBRARIES", .init(booleanLiteral: value))
-                case .gccMacOSXVersionMin(let value):
-                    return ("GCC_MACOSX_VERSION_MIN", .string(value))
                 case .gccNoCommonBlocks(let value):
                     return ("GCC_NO_COMMON_BLOCKS", .init(booleanLiteral: value))
                 case .gccOBJCABIVersion(let value):
@@ -2331,6 +2364,8 @@ public extension SettingsDictionary {
                     return ("GENERATED_MODULEMAP_DIR", .string(value))
                 case .generateInfoplistFile(let value):
                     return ("GENERATE_INFOPLIST_FILE", .init(booleanLiteral: value))
+                case .generateIntermediateTextBasedStubs(let value):
+                    return ("GENERATE_INTERMEDIATE_TEXT_BASED_STUBS", .init(booleanLiteral: value))
                 case .generateMasterObjectFile(let value):
                     return ("GENERATE_MASTER_OBJECT_FILE", .init(booleanLiteral: value))
                 case .generatePkginfoFile(let value):
@@ -2339,9 +2374,9 @@ public extension SettingsDictionary {
                     return ("GENERATE_PROFILING_CODE", .init(booleanLiteral: value))
                 case .generateTextBasedStubs(let value):
                     return ("GENERATE_TEXT_BASED_STUBS", .init(booleanLiteral: value))
-                case .globalCFLAGS(let value):
+                case .globalCFlags(let value):
                     return ("GLOBAL_CFLAGS", .array(value))
-                case .generatedPKGInfoFile(let value):
+                case .generatedPkgInfoFile(let value):
                     return ("GeneratedPkgInfoFile", .string(value))
                 case .headermapFileFormat(let value):
                     return ("HEADERMAP_FILE_FORMAT", .string(value.rawValue))
@@ -2669,7 +2704,7 @@ public extension SettingsDictionary {
                     return ("JIKES_DEFAULT_FLAGS", .array(value))
                 case .keepPrivateExterns(let value):
                     return ("KEEP_PRIVATE_EXTERNS", .init(booleanLiteral: value))
-                case .kextCFLAGS(let value):
+                case .kextCFlags(let value):
                     return ("KEXT_CFLAGS", .array(value))
                 case .kextCPlusPlusFlags(let value):
                     return ("KEXT_CPLUSPLUSFLAGS", .array(value))
@@ -2681,8 +2716,8 @@ public extension SettingsDictionary {
                     return ("LD_DEBUG_VARIANT", .init(booleanLiteral: value))
                 case .ldDependencyInfoFile(let value):
                     return ("LD_DEPENDENCY_INFO_FILE", .string(value))
-                case .ldDeploymentTarget(let value):
-                    return ("LD_DEPLOYMENT_TARGET", .string(value))
+                case .ldDeterministicMode(let value):
+                    return ("LD_DETERMINISTIC_MODE", .init(booleanLiteral: value))
                 case .ldDontRunDeduplication(let value):
                     return ("LD_DONT_RUN_DEDUPLICATION", .init(booleanLiteral: value))
                 case .ldDYLIBAllowableClients(let value):
@@ -2785,12 +2820,16 @@ public extension SettingsDictionary {
                     return ("LLVM_TARGET_TRIPLE_SUFFIX", .string(value))
                 case .llvmTargetTripleVendor(let value):
                     return ("LLVM_TARGET_TRIPLE_VENDOR", .string(value))
+                case .lmAuxConstMetadataFiles(let value):
+                    return ("LM_AUX_CONST_METADATA_FILES", .array(value))
                 case .lmBinaryPath(let value):
                     return ("LM_BINARY_PATH", .string(value))
                 case .lmDependencyFiles(let value):
                     return ("LM_DEPENDENCY_FILES", .array(value))
                 case .lmEnableLinkGeneration(let value):
                     return ("LM_ENABLE_LINK_GENERATION", .init(booleanLiteral: value))
+                case .lmSourceFiles(let value):
+                    return ("LM_SOURCE_FILES", .array(value))
                 case .lmStringsdataFiles(let value):
                     return ("LM_STRINGSDATA_FILES", .array(value))
                 case .localizableContentDir(let value):
@@ -2967,7 +3006,7 @@ public extension SettingsDictionary {
                     return ("OPENCL_OTHER_BC_FLAGS", .array(value))
                 case .openCLPreprocessorDefinitions(let value):
                     return ("OPENCL_PREPROCESSOR_DEFINITIONS", .array(value))
-                case .optimizationCFLAGS(let value):
+                case .optimizationCFlags(let value):
                     return ("OPTIMIZATION_CFLAGS", .array(value))
                 case .orderFile(let value):
                     return ("ORDER_FILE", .string(value))
@@ -2975,7 +3014,7 @@ public extension SettingsDictionary {
                     return ("OSAC", .string(value))
                 case .osacompileExecuteOnly(let value):
                     return ("OSACOMPILE_EXECUTE_ONLY", .init(booleanLiteral: value))
-                case .otherCFLAGS(let value):
+                case .otherCFlags(let value):
                     return ("OTHER_CFLAGS", .array(value))
                 case .otherCodeSignFlags(let value):
                     return ("OTHER_CODE_SIGN_FLAGS", .array(value))
@@ -2983,11 +3022,11 @@ public extension SettingsDictionary {
                     return ("OTHER_CPLUSPLUSFLAGS", .array(value))
                 case .otherDocCFlags(let value):
                     return ("OTHER_DOCC_FLAGS", .array(value))
-                case .otherIIGCFLAGS(let value):
+                case .otherIIGCFlags(let value):
                     return ("OTHER_IIG_CFLAGS", .array(value))
                 case .otherIIGFlags(let value):
                     return ("OTHER_IIG_FLAGS", .array(value))
-                case .otherLdflags(let value):
+                case .otherLDFlags(let value):
                     return ("OTHER_LDFLAGS", .array(value))
                 case .otherLDRFlags(let value):
                     return ("OTHER_LDRFLAGS", .array(value))
@@ -2999,7 +3038,7 @@ public extension SettingsDictionary {
                     return ("OTHER_OSACOMPILEFLAGS", .array(value))
                 case .otherOSAFlags(let value):
                     return ("OTHER_OSAFLAGS", .array(value))
-                case .otherPrecompCFLAGS(let value):
+                case .otherPrecompCFlags(let value):
                     return ("OTHER_PRECOMP_CFLAGS", .array(value))
                 case .otherRCProjectFlags(let value):
                     return ("OTHER_RCPROJECT_FLAGS", .array(value))
@@ -3057,7 +3096,7 @@ public extension SettingsDictionary {
                     return ("PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR", .init(booleanLiteral: value))
                 case .precompDestinationDir(let value):
                     return ("PRECOMP_DESTINATION_DIR", .string(value))
-                case .prefixCflagBase(let value):
+                case .prefixCFlagBase(let value):
                     return ("PREFIX_CFLAG_BASE", .string(value))
                 case .prefixFlags(let value):
                     return ("PREFIX_FLAGS", .array(value))
@@ -3193,6 +3232,8 @@ public extension SettingsDictionary {
                     return ("SDKDB_TO_SYMGRAPH_EXEC", .string(value))
                 case .sdkroot(let value):
                     return ("SDKROOT", .string(value))
+                case .sdkStatCacheEnable(let value):
+                    return ("SDK_STAT_CACHE_ENABLE", .init(booleanLiteral: value))
                 case .sectOrderFlags(let value):
                     return ("SECTORDER_FLAGS", .array(value))
                 case .sed(let value):
@@ -3243,9 +3284,11 @@ public extension SettingsDictionary {
                     return ("STRIPFLAGS", .array(value))
                 case .stripBitcodeFromCopiedFiles(let value):
                     return ("STRIP_BITCODE_FROM_COPIED_FILES", .init(booleanLiteral: value))
+                case .stripDeterministicMode(let value):
+                    return ("STRIP_DETERMINISTIC_MODE", .init(booleanLiteral: value))
                 case .stripInstalledProduct(let value):
                     return ("STRIP_INSTALLED_PRODUCT", .init(booleanLiteral: value))
-                case .stripPngText(let value):
+                case .stripPNGText(let value):
                     return ("STRIP_PNG_TEXT", .init(booleanLiteral: value))
                 case .stripStyle(let value):
                     return ("STRIP_STYLE", .string(value.rawValue))
@@ -3271,6 +3314,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_DEPLOYMENT_TARGET", .string(value))
                 case .swiftDisableSafetyChecks(let value):
                     return ("SWIFT_DISABLE_SAFETY_CHECKS", .init(booleanLiteral: value))
+                case .swiftEmitConstValueProtocols(let value):
+                    return ("SWIFT_EMIT_CONST_VALUE_PROTOCOLS", .array(value))
                 case .swiftEmitLOCStrings(let value):
                     return ("SWIFT_EMIT_LOC_STRINGS", .init(booleanLiteral: value))
                 case .swiftEmitModuleInterface(let value):
@@ -3281,6 +3326,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_ENABLE_BARE_SLASH_REGEX", .init(booleanLiteral: value))
                 case .swiftEnableBatchMode(let value):
                     return ("SWIFT_ENABLE_BATCH_MODE", .init(booleanLiteral: value))
+                case .swiftEnableEmitConstValues(let value):
+                    return ("SWIFT_ENABLE_EMIT_CONST_VALUES", .init(booleanLiteral: value))
                 case .swiftEnableIncrementalCompilation(let value):
                     return ("SWIFT_ENABLE_INCREMENTAL_COMPILATION", .init(booleanLiteral: value))
                 case .swiftEnableLibraryEvolution(let value):
@@ -3411,10 +3458,8 @@ public extension SettingsDictionary {
                     return ("SigningCert", .string(value))
                 case .tapiApplicationExtensionAPIOnly(let value):
                     return ("TAPI_APPLICATION_EXTENSION_API_ONLY", .init(booleanLiteral: value))
-                case .tapiArchs(let value):
-                    return ("TAPI_ARCHS", .array(value))
-                case .tapiDeploymentTarget(let value):
-                    return ("TAPI_DEPLOYMENT_TARGET", .string(value))
+                case .tapiDemangle(let value):
+                    return ("TAPI_DEMANGLE", .init(booleanLiteral: value))
                 case .tapiDYLIBAllowableClients(let value):
                     return ("TAPI_DYLIB_ALLOWABLE_CLIENTS", .array(value))
                 case .tapiDYLIBCompatibilityVersion(let value):
@@ -3431,6 +3476,12 @@ public extension SettingsDictionary {
                     return ("TAPI_ENABLE_PROJECT_HEADERS", .init(booleanLiteral: value))
                 case .tapiEnableVerificationMode(let value):
                     return ("TAPI_ENABLE_VERIFICATION_MODE", .init(booleanLiteral: value))
+                case .tapiExcludePrivateHeaders(let value):
+                    return ("TAPI_EXCLUDE_PRIVATE_HEADERS", .array(value))
+                case .tapiExcludeProjectHeaders(let value):
+                    return ("TAPI_EXCLUDE_PROJECT_HEADERS", .array(value))
+                case .tapiExcludePublicHeaders(let value):
+                    return ("TAPI_EXCLUDE_PUBLIC_HEADERS", .array(value))
                 case .tapiExec(let value):
                     return ("TAPI_EXEC", .string(value))
                 case .tapiExtractAPIEnableModules(let value):
@@ -3449,12 +3500,22 @@ public extension SettingsDictionary {
                     return ("TAPI_EXTRACT_API_SYSTEM_ROOT", .string(value))
                 case .tapiExtractAPITargetTriple(let value):
                     return ("TAPI_EXTRACT_API_TARGET_TRIPLE", .string(value))
+                case .tapiExtraPrivateHeaders(let value):
+                    return ("TAPI_EXTRA_PRIVATE_HEADERS", .array(value))
+                case .tapiExtraProjectHeaders(let value):
+                    return ("TAPI_EXTRA_PROJECT_HEADERS", .array(value))
+                case .tapiExtraPublicHeaders(let value):
+                    return ("TAPI_EXTRA_PUBLIC_HEADERS", .array(value))
                 case .tapiFrameworkSearchPaths(let value):
                     return ("TAPI_FRAMEWORK_SEARCH_PATHS", .array(value))
                 case .tapiHeaderSearchPaths(let value):
                     return ("TAPI_HEADER_SEARCH_PATHS", .array(value))
                 case .tapiInputs(let value):
                     return ("TAPI_INPUTS", .array(value))
+                case .tapiLanguage(let value):
+                    return ("TAPI_LANGUAGE", .string(value.rawValue))
+                case .tapiLanguageStandard(let value):
+                    return ("TAPI_LANGUAGE_STANDARD", .string(value.rawValue))
                 case .tapiLibrarySearchPaths(let value):
                     return ("TAPI_LIBRARY_SEARCH_PATHS", .array(value))
                 case .tapiModulesValidateSystemHeaders(let value):
@@ -3517,6 +3578,8 @@ public extension SettingsDictionary {
                     return ("TREAT_MISSING_BASELINES_AS_TEST_FAILURES", .init(booleanLiteral: value))
                 case .unexportedSymbolsFile(let value):
                     return ("UNEXPORTED_SYMBOLS_FILE", .string(value))
+                case .uninstalledProductsDir(let value):
+                    return ("UNINSTALLED_PRODUCTS_DIR", .string(value))
                 case .unlocalizedResourcesFolderPath(let value):
                     return ("UNLOCALIZED_RESOURCES_FOLDER_PATH", .string(value))
                 case .unstrippedProduct(let value):
@@ -3535,14 +3598,6 @@ public extension SettingsDictionary {
                     return ("USE_HEADERMAP", .init(booleanLiteral: value))
                 case .useHeaderSYMLINKS(let value):
                     return ("USE_HEADER_SYMLINKS", .init(booleanLiteral: value))
-                case .useLLVMTargetTriples(let value):
-                    return ("USE_LLVM_TARGET_TRIPLES", .init(booleanLiteral: value))
-                case .useLLVMTargetTriplesForClang(let value):
-                    return ("USE_LLVM_TARGET_TRIPLES_FOR_CLANG", .init(booleanLiteral: value))
-                case .useLLVMTargetTriplesForLD(let value):
-                    return ("USE_LLVM_TARGET_TRIPLES_FOR_LD", .init(booleanLiteral: value))
-                case .useLLVMTargetTriplesForTAPI(let value):
-                    return ("USE_LLVM_TARGET_TRIPLES_FOR_TAPI", .init(booleanLiteral: value))
                 case .validatePlistFilesWhileCopying(let value):
                     return ("VALIDATE_PLIST_FILES_WHILE_COPYING", .init(booleanLiteral: value))
                 case .validateProduct(let value):
@@ -3573,9 +3628,9 @@ public extension SettingsDictionary {
                     return ("VERSION_INFO_STRING", .string(value))
                 case .versionInfoSuffix(let value):
                     return ("VERSION_INFO_SUFFIX", .string(value))
-                case .warningCFLAGS(let value):
+                case .warningCFlags(let value):
                     return ("WARNING_CFLAGS", .array(value))
-                case .warningLdflags(let value):
+                case .warningLDFlags(let value):
                     return ("WARNING_LDFLAGS", .array(value))
                 case .wrapperExtension(let value):
                     return ("WRAPPER_EXTENSION", .string(value))
@@ -3716,21 +3771,21 @@ public extension SettingsDictionary {
     }
 
     enum ClangCxxLanguageStandardValue: String {
-        case c98 = "c++98"
-        case gnu98 = "gnu++98"
-        case c0X = "c++0x"
-        case gnu0X = "gnu++0x"
-        case c14 = "c++14"
-        case gnu14 = "gnu++14"
-        case c17 = "c++17"
-        case gnu17 = "gnu++17"
-        case c20 = "c++20"
-        case gnu20 = "gnu++20"
+        case cPlusPlus98 = "c++98"
+        case gnuPlusPlus98 = "gnu++98"
+        case cPlusPlus0X = "c++0x"
+        case gnuPlusPlus0X = "gnu++0x"
+        case cPlusPlus14 = "c++14"
+        case gnuPlusPlus14 = "gnu++14"
+        case cPlusPlus17 = "c++17"
+        case gnuPlusPlus17 = "gnu++17"
+        case cPlusPlus20 = "c++20"
+        case gnuPlusPlus20 = "gnu++20"
         case compilerDefault = "compiler-default"
     }
 
     enum ClangCxxLibraryValue: String {
-        case libc = "libc++"
+        case libcPlusPlus = "libc++"
         case compilerDefault = "compiler-default"
     }
 
@@ -4302,6 +4357,33 @@ public extension SettingsDictionary {
         case complete = "complete"
     }
 
+    enum TapiLanguageValue: String {
+        case objectiveC = "objective-c"
+        case objectiveCPlusPlus = "objective-c++"
+        case cPlusPlus = "c++"
+        case c = "c"
+    }
+
+    enum TapiLanguageStandardValue: String {
+        case c89 = "c89"
+        case gnu89 = "gnu89"
+        case c99 = "c99"
+        case gnu99 = "gnu99"
+        case c11 = "c11"
+        case gnu11 = "gnu11"
+        case cPlusPlus98 = "c++98"
+        case gnuPlusPlus98 = "gnu++98"
+        case cPlusPlus0X = "c++0x"
+        case gnuPlusPlus0X = "gnu++0x"
+        case cPlusPlus14 = "c++14"
+        case gnuPlusPlus14 = "gnu++14"
+        case cPlusPlus17 = "c++17"
+        case gnuPlusPlus17 = "gnu++17"
+        case cPlusPlus20 = "c++20"
+        case gnuPlusPlus20 = "gnu++20"
+        case compilerDefault = "compiler-default"
+    }
+
     enum TapiVerifyModeValue: String {
         case errorsonly = "ErrorsOnly"
         case errorsandwarnings = "ErrorsAndWarnings"
@@ -4368,3 +4450,4 @@ extension SettingsDictionary: ExpressibleByArrayLiteral {
     }
 
 }
+    
