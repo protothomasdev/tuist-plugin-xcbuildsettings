@@ -2,7 +2,7 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 15.0
+// Generated for Xcode version 15.0.1
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
