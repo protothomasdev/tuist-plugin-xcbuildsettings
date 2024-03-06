@@ -2,13 +2,14 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 15.2
+// Generated for Xcode version 15.3
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
         /// A string identifying the build system action being performed.
         case action(_ value: String = "")
         case additionalSDKs(_ values: [String] = [])
+        case allowableClients(_ values: [String] = [])
         /// If enabled, allows targets to build multiple times within a single build operation. Targets will build for the platform of the active run destination, as well as the platforms of any targets which depend on them.
         case allowTargetPlatformSpecialization(_ bool: Bool = false)
         case allOtherLDFlags(_ values: [String] = ["$(LD_FLAGS)", "$(SECTORDER_FLAGS)", "$(OTHER_LDFLAGS)", "$(OTHER_LDFLAGS_$(variant))", "$(OTHER_LDFLAGS_$(arch))", "$(OTHER_LDFLAGS_$(variant)_$(arch))", "$(PRODUCT_SPECIFIC_LDFLAGS)"])
@@ -265,6 +266,8 @@ public extension SettingsDictionary {
         case clangUndefinedBehaviorSanitizerTrapOnSecurityIssues(_ bool: Bool = false)
         case clangUndefinedBehaviorSanitizerTrapOnSecurityIssuesOpt(_ bool: Bool = true)
         case clangUseOptimizationProfile(_ bool: Bool = false)
+        /// When this setting is enabled, the build system will use response files to share common arguments between similar invocations of `clang`, eliminating redundant information in build logs.
+        case clangUseResponseFile(_ bool: Bool = true)
         case clangWarnAssignEnum(_ bool: Bool = false)
         case clangWarnAtomicImplicitSEQCST(_ bool: Bool = false)
         case clangWarnBlockCaptureAutoreleasing(_ value: ClangWarnBlockCaptureAutoreleasingValue = .no)
@@ -453,7 +456,7 @@ public extension SettingsDictionary {
         case embeddedContentContainsSwift(_ bool: Bool = false)
         /// Embed all the built asset packs inside the product bundle. Since this negates the performance benefits of the On Demand Resources feature, it is only useful for testing purposes when it isn't practical to use an asset pack server.
         case embedAssetPacksInProductBundle(_ bool: Bool = false)
-        case enableAppintentsDeploymentAwareProcessing(_ bool: Bool = false)
+        case enableAppintentsDeploymentAwareProcessing(_ bool: Bool = true)
         case enableAppleKEXTCodeGeneration(_ bool: Bool = false)
         case enableAppSandbox(_ bool: Bool = false)
         case enableBitcode(_ bool: Bool = false)
@@ -475,6 +478,7 @@ public extension SettingsDictionary {
         /// If enabled, the product will be built with options appropriate for supporting previews.
         case enablePreviews(_ bool: Bool)
         case enableStrictOBJCMSGSEND(_ bool: Bool = false)
+        case enableSystemSanitizers(_ bool: Bool)
         /// Enabling this setting will build the target with options appropriate for running automated tests against its product.
         ///
         /// This setting can be enabled when building targets for debugging if their products will be tested. This may result in tests running slower than otherwise.
@@ -893,11 +897,12 @@ public extension SettingsDictionary {
         case ldDependencyInfoFile(_ path: Path = "$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/$(CURRENT_ARCH)/$(PRODUCT_NAME)_dependency_info.dat")
         case ldDeterministicMode(_ bool: Bool = true)
         case ldDontRunDeduplication(_ bool: Bool = true)
-        case ldDYLIBAllowableClients(_ values: [String] = [])
+        case ldDYLIBAllowableClients(_ values: [String] = ["$(ALLOWABLE_CLIENTS)"])
         case ldDYLIBInstallName(_ path: Path = "")
         case ldEntitlementsSection(_ value: String = "")
         case ldEntitlementsSectionDer(_ value: String = "")
         case ldEntryPoint(_ value: String)
+        case ldEnvironment(_ values: [String])
         case ldExportGlobalSymbols(_ bool: Bool = false)
         case ldExportSymbols(_ bool: Bool = true)
         case ldFinalOutputFile(_ path: Path = "$(INSTALL_PATH)/$(EXECUTABLE_PATH)")
@@ -949,7 +954,7 @@ public extension SettingsDictionary {
         case llvmTargetTripleOSVersion(_ value: String = "$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         case llvmTargetTripleSuffix(_ value: String = "")
         case llvmTargetTripleVendor(_ value: String = "apple")
-        case lmAuxConstMetadataFiles(_ values: [String] = [])
+        case lmAuxConstMetadataListPath(_ path: Path = "$(LM_AUX_CONST_METADATA_LIST_PATH_$(variant)_$(arch))")
         case lmBinaryPath(_ value: String = "")
         case lmCompileTimeExtraction(_ bool: Bool = true)
         case lmDependencyFiles(_ values: [String] = [])
@@ -959,8 +964,9 @@ public extension SettingsDictionary {
         case lmForceLinkGeneration(_ bool: Bool = false)
         case lmIgnoreQueryGenericsErrors(_ bool: Bool = false)
         case lmLegacyExtractionOverride(_ bool: Bool = true)
-        case lmSourceFiles(_ values: [String] = [])
+        case lmSourceFileListPath(_ values: [String])
         case lmStringsdataFiles(_ values: [String] = [])
+        case lmSwiftConstValsListPath(_ values: [String])
         case localizableContentDir(_ path: Path = "")
         /// When enabled, localizable content in this target/project can be exported.
         case localizationExportSupported(_ bool: Bool = true)
@@ -1129,6 +1135,8 @@ public extension SettingsDictionary {
         case prelinkLibs(_ values: [String] = [])
         case preserveDeadCodeInitsAndTerms(_ bool: Bool = false)
         case privateHeadersFolderPath(_ value: String = "")
+        /// Path of the per-architecture, per-variant intermediate Info.plist after C preprocessing and/or variable expansion have been applied.
+        case processedInfoplistPath(_ path: Path = "$(OBJECT_FILE_DIR)-$(CURRENT_VARIANT)/$(CURRENT_ARCH)/Processed-Info.plist")
         /// A string that uniquely identifies the bundle. The string should be in reverse DNS format using only alphanumeric characters (`A-Z`, `a-z`, `0-9`), the dot (`.`), and the hyphen (`-`).
         ///
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CFBundleIdentifier](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier) key in the `Info.plist` file to the value of this build setting.
@@ -1248,6 +1256,7 @@ public extension SettingsDictionary {
         case swiftActiveCompilationConditions(_ values: [String] = [])
         case swiftAddressSanitizer(_ bool: Bool = false)
         case swiftAddressSanitizerAllowErrorRecovery(_ bool: Bool = false)
+        case swiftAllowableClients(_ values: [String] = ["$(ALLOWABLE_CLIENTS:c99extidentifier)"])
         case swiftBitcodeGenerationMode(_ value: SwiftBitcodeGenerationModeValue)
         case swiftClangCXXLanguageStandard(_ value: String = "$(SWIFT_OBJC_INTEROP_MODE)-$(CLANG_CXX_LANGUAGE_STANDARD)")
         case swiftCompilationMode(_ value: SwiftCompilationModeValue = .singlefile)
@@ -1255,6 +1264,7 @@ public extension SettingsDictionary {
         case swiftDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         /// Disable runtime safety checks when optimizing.
         case swiftDisableSafetyChecks(_ bool: Bool = false)
+        case swiftEagerModuleEmissionInWMO(_ bool: Bool = true)
         /// A list of protocol names whose conformances the Swift compiler is to emit compile-time-known values for.
         case swiftEmitConstValueProtocols(_ values: [String] = ["AppIntent", "EntityQuery", "AppEntity", "TransientEntity", "AppEnum", "AppShortcutProviding", "AppShortcutsProvider", "AnyResolverProviding", "AppIntentsPackage", "DynamicOptionsProvider"])
         /// When enabled, the Swift compiler will be used to extract Swift string literal and interpolation `LocalizedStringKey` and `LocalizationKey` types during localization export.
@@ -1485,6 +1495,8 @@ public extension SettingsDictionary {
                     return ("ACTION", .string(value))
                 case .additionalSDKs(let value):
                     return ("ADDITIONAL_SDKS", .array(value))
+                case .allowableClients(let value):
+                    return ("ALLOWABLE_CLIENTS", .array(value))
                 case .allowTargetPlatformSpecialization(let value):
                     return ("ALLOW_TARGET_PLATFORM_SPECIALIZATION", .init(booleanLiteral: value))
                 case .allOtherLDFlags(let value):
@@ -1925,6 +1937,8 @@ public extension SettingsDictionary {
                     return ("CLANG_UNDEFINED_BEHAVIOR_SANITIZER_TRAP_ON_SECURITY_ISSUES_OPT", .init(booleanLiteral: value))
                 case .clangUseOptimizationProfile(let value):
                     return ("CLANG_USE_OPTIMIZATION_PROFILE", .init(booleanLiteral: value))
+                case .clangUseResponseFile(let value):
+                    return ("CLANG_USE_RESPONSE_FILE", .init(booleanLiteral: value))
                 case .clangWarnAssignEnum(let value):
                     return ("CLANG_WARN_ASSIGN_ENUM", .init(booleanLiteral: value))
                 case .clangWarnAtomicImplicitSEQCST(let value):
@@ -2287,6 +2301,8 @@ public extension SettingsDictionary {
                     return ("ENABLE_PREVIEWS", .init(booleanLiteral: value))
                 case .enableStrictOBJCMSGSEND(let value):
                     return ("ENABLE_STRICT_OBJC_MSGSEND", .init(booleanLiteral: value))
+                case .enableSystemSanitizers(let value):
+                    return ("ENABLE_SYSTEM_SANITIZERS", .init(booleanLiteral: value))
                 case .enableTestability(let value):
                     return ("ENABLE_TESTABILITY", .init(booleanLiteral: value))
                 case .enableTestingSearchPaths(let value):
@@ -2893,6 +2909,8 @@ public extension SettingsDictionary {
                     return ("LD_ENTITLEMENTS_SECTION_DER", .string(value))
                 case .ldEntryPoint(let value):
                     return ("LD_ENTRY_POINT", .string(value))
+                case .ldEnvironment(let value):
+                    return ("LD_ENVIRONMENT", .array(value))
                 case .ldExportGlobalSymbols(let value):
                     return ("LD_EXPORT_GLOBAL_SYMBOLS", .init(booleanLiteral: value))
                 case .ldExportSymbols(let value):
@@ -2995,8 +3013,8 @@ public extension SettingsDictionary {
                     return ("LLVM_TARGET_TRIPLE_SUFFIX", .string(value))
                 case .llvmTargetTripleVendor(let value):
                     return ("LLVM_TARGET_TRIPLE_VENDOR", .string(value))
-                case .lmAuxConstMetadataFiles(let value):
-                    return ("LM_AUX_CONST_METADATA_FILES", .array(value))
+                case .lmAuxConstMetadataListPath(let value):
+                    return ("LM_AUX_CONST_METADATA_LIST_PATH", .string(value))
                 case .lmBinaryPath(let value):
                     return ("LM_BINARY_PATH", .string(value))
                 case .lmCompileTimeExtraction(let value):
@@ -3015,10 +3033,12 @@ public extension SettingsDictionary {
                     return ("LM_IGNORE_QUERY_GENERICS_ERRORS", .init(booleanLiteral: value))
                 case .lmLegacyExtractionOverride(let value):
                     return ("LM_LEGACY_EXTRACTION_OVERRIDE", .init(booleanLiteral: value))
-                case .lmSourceFiles(let value):
-                    return ("LM_SOURCE_FILES", .array(value))
+                case .lmSourceFileListPath(let value):
+                    return ("LM_SOURCE_FILE_LIST_PATH", .array(value))
                 case .lmStringsdataFiles(let value):
                     return ("LM_STRINGSDATA_FILES", .array(value))
+                case .lmSwiftConstValsListPath(let value):
+                    return ("LM_SWIFT_CONST_VALS_LIST_PATH", .array(value))
                 case .localizableContentDir(let value):
                     return ("LOCALIZABLE_CONTENT_DIR", .string(value))
                 case .localizationExportSupported(let value):
@@ -3321,6 +3341,8 @@ public extension SettingsDictionary {
                     return ("PRESERVE_DEAD_CODE_INITS_AND_TERMS", .init(booleanLiteral: value))
                 case .privateHeadersFolderPath(let value):
                     return ("PRIVATE_HEADERS_FOLDER_PATH", .string(value))
+                case .processedInfoplistPath(let value):
+                    return ("PROCESSED_INFOPLIST_PATH", .string(value))
                 case .productBundleIdentifier(let value):
                     return ("PRODUCT_BUNDLE_IDENTIFIER", .string(value))
                 case .productModuleName(let value):
@@ -3523,6 +3545,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_ADDRESS_SANITIZER", .init(booleanLiteral: value))
                 case .swiftAddressSanitizerAllowErrorRecovery(let value):
                     return ("SWIFT_ADDRESS_SANITIZER_ALLOW_ERROR_RECOVERY", .init(booleanLiteral: value))
+                case .swiftAllowableClients(let value):
+                    return ("SWIFT_ALLOWABLE_CLIENTS", .array(value))
                 case .swiftBitcodeGenerationMode(let value):
                     return ("SWIFT_BITCODE_GENERATION_MODE", .string(value.rawValue))
                 case .swiftClangCXXLanguageStandard(let value):
@@ -3535,6 +3559,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_DEPLOYMENT_TARGET", .string(value))
                 case .swiftDisableSafetyChecks(let value):
                     return ("SWIFT_DISABLE_SAFETY_CHECKS", .init(booleanLiteral: value))
+                case .swiftEagerModuleEmissionInWMO(let value):
+                    return ("SWIFT_EAGER_MODULE_EMISSION_IN_WMO", .init(booleanLiteral: value))
                 case .swiftEmitConstValueProtocols(let value):
                     return ("SWIFT_EMIT_CONST_VALUE_PROTOCOLS", .array(value))
                 case .swiftEmitLOCStrings(let value):
