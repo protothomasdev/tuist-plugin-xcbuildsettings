@@ -9,7 +9,7 @@ This offers to advantages:
 
 The methods and Enum cases of this plugin are automatically generated with the help of the [XcodeBuildSettingsExtractor](https://github.com/protothomasdev/XcodeBuildSettingsExtractor) tool.
 
-**Updated for Xcode 14.3.**
+**Updated for Xcode 16.0 Beta 1**
 
 ## Requirements
 

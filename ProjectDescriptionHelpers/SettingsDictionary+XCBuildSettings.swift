@@ -2,14 +2,13 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 15.4
+// Generated for Xcode version 16.0
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
         /// A string identifying the build system action being performed.
         case action(_ value: String = "")
         case additionalSDKs(_ values: [String] = [])
-        case allowableClients(_ values: [String] = [])
         /// If enabled, allows targets to build multiple times within a single build operation. Targets will build for the platform of the active run destination, as well as the platforms of any targets which depend on them.
         case allowTargetPlatformSpecialization(_ bool: Bool = false)
         case allOtherLDFlags(_ values: [String] = ["$(LD_FLAGS)", "$(SECTORDER_FLAGS)", "$(OTHER_LDFLAGS)", "$(OTHER_LDFLAGS_$(variant))", "$(OTHER_LDFLAGS_$(arch))", "$(OTHER_LDFLAGS_$(variant)_$(arch))", "$(PRODUCT_SPECIFIC_LDFLAGS)"])
@@ -29,6 +28,13 @@ public extension SettingsDictionary {
         case appIntentsDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         case appIntentsMetadataPath(_ value: String = "$(ProductResourcesDir)/Metadata.appintents")
         case appIntentsPlatformFamily(_ value: String = "$(PLATFORM_FAMILY_NAME)")
+        case appPlaygroundAssetCatalogGenerator(_ path: Path = "appleProductTypesTool")
+        case appPlaygroundGeneratedAssetCatalogAppiconName(_ value: String = "$(ASSETCATALOG_COMPILER_APPICON_NAME)")
+        case appPlaygroundGeneratedAssetCatalogFile(_ path: Path = "$(DERIVED_FILE_DIR)/AppPlaygroundDefaultAssetCatalog.xcassets")
+        case appPlaygroundGeneratedAssetCatalogGlobalAccentColorName(_ value: String = "$(ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME)")
+        case appPlaygroundGeneratedAssetCatalogPlaceholderAppicon(_ value: String = "")
+        case appPlaygroundGeneratedAssetCatalogPresetAccentColor(_ value: String = "")
+        case appPlaygroundGenerateAssetCatalog(_ bool: Bool = false)
         /// When enabled, generates assets needed for App Shortcuts Flexible Matching.
         case appShortcutsEnableFlexibleMatching(_ bool: Bool = true)
         case archs(_ values: [String] = ["$(ARCHS_STANDARD)"])
@@ -128,7 +134,6 @@ public extension SettingsDictionary {
         case cchroot(_ path: Path = "$(CACHE_ROOT)")
         case chmod(_ path: Path = "/bin/chmod")
         case chown(_ path: Path = "/usr/sbin/chown")
-        case clang(_ path: Path = "clang")
         case clangAddressSanitizer(_ bool: Bool = false)
         case clangAddressSanitizerAllowErrorRecovery(_ bool: Bool = false)
         case clangAddressSanitizerContainerOverflow(_ bool: Bool = false)
@@ -175,16 +180,13 @@ public extension SettingsDictionary {
         case clangAnalyzerSecurityInsecureapiVfork(_ bool: Bool = true)
         case clangAnalyzerSecurityKeychainAPI(_ bool: Bool = true)
         case clangAnalyzerUseAfterMove(_ value: ClangAnalyzerUseAfterMoveValue = .yesAggressive)
-        case clangARCMigrateDir(_ path: Path)
-        case clangARCMigrateEmitError(_ bool: Bool = false)
-        case clangARCMigratePrecheck(_ value: ClangArcMigratePrecheckValue = .donothing)
-        case clangARCMigrateReportOutput(_ path: Path)
         case clangBitcodeGenerationMode(_ value: ClangBitcodeGenerationModeValue)
         case clangColorDiagnostics(_ bool: Bool = false)
         case clangCoverageMapping(_ bool: Bool = false)
         case clangCoverageMappingLinkerArgs(_ bool: Bool = false)
         case clangCXXLanguageStandard(_ value: ClangCxxLanguageStandardValue = .compilerDefault)
         case clangCXXLibrary(_ value: ClangCxxLibraryValue = .compilerDefault)
+        case clangCXXStandardLibraryHardening(_ value: ClangCxxStandardLibraryHardeningValue)
         case clangDebugInformationLevel(_ value: ClangDebugInformationLevelValue = .Default)
         case clangDebugModules(_ bool: Bool = false)
         case clangDiagnosticsFile(_ path: Path = "$(MTLCOMPILER_OUTPUT_FILE:dir)$(InputFileBase)$(InputFileBaseUniquefier).dia")
@@ -192,8 +194,10 @@ public extension SettingsDictionary {
         case clangEnableBoundsAttributes(_ bool: Bool = false)
         case clangEnableBoundsSafety(_ bool: Bool = false)
         case clangEnableCodeCoverage(_ bool: Bool = false)
+        case clangEnableCplusplusTypedAllocatorSupport(_ value: ClangEnableCplusplusTypedAllocatorSupportValue = .compilerDefault)
         case clangEnableCPPStaticDestructors(_ bool: Bool = true)
-        case clangEnableExplicitModules(_ bool: Bool = false)
+        case clangEnableCTypedAllocatorSupport(_ value: ClangEnableCTypedAllocatorSupportValue = .compilerDefault)
+        case clangEnableExplicitModules(_ bool: Bool = true)
         case clangEnableModules(_ bool: Bool = false)
         /// When this setting is enabled, `clang` will use the shared debug info available in `clang` modules and precompiled headers. This results in smaller build artifacts, faster compile times, and more complete debug info. This setting should only be disabled when building static libraries with debug info for distribution.
         case clangEnableModuleDebugging(_ bool: Bool = true)
@@ -208,30 +212,6 @@ public extension SettingsDictionary {
         case clangLibfuzzer(_ bool: Bool = false)
         case clangLinkOBJCRuntime(_ bool: Bool = false)
         case clangMacroBacktraceLimit(_ value: String = "0")
-        /// Add attribute annotations to properties and methods.
-        case clangMigratorAnnotations(_ bool: Bool = true)
-        /// Infer `instancetype` for method result type instead of `id`.
-        case clangMigratorInstanceType(_ bool: Bool = true)
-        /// Use `NS_ENUM`/`NS_OPTIONS` macros for enumerators.
-        case clangMigratorNSEnumMacros(_ bool: Bool = true)
-        /// Infer `NS_DESIGNATED_INITIALIZER` for designated initializer methods.
-        case clangMigratorOBJCDesignatedInit(_ bool: Bool = true)
-        /// Enable migration to modern ObjC literals syntax.
-        case clangMigratorOBJCLiterals(_ bool: Bool = true)
-        /// Enable migration to modern ObjC subscripting syntax.
-        case clangMigratorOBJCSubscripting(_ bool: Bool = true)
-        /// Choose the atomicity of the inferred properties.
-        case clangMigratorPropertyAtomicity(_ value: ClangMigratorPropertyAtomicityValue = .nsNonatomicIosonly)
-        /// Enable migration of setter/getter messages to property-dot syntax.
-        case clangMigratorPropertyDotSyntax(_ bool: Bool = true)
-        /// Infer protocol conformance from the interface methods.
-        case clangMigratorProtocolConformance(_ bool: Bool = false)
-        /// Only modify public headers of a target.
-        case clangMigratorPublicHeadersOnly(_ bool: Bool = true)
-        /// Infer readonly properties from getter methods.
-        case clangMigratorReadonlyProperty(_ bool: Bool = true)
-        /// Infer readwrite properties from a getter and setter method.
-        case clangMigratorReadwriteProperty(_ bool: Bool = true)
         case clangModulesAutolink(_ bool: Bool = true)
         case clangModulesBuildSessionFile(_ value: String = "")
         case clangModulesDisablePrivateWarning(_ bool: Bool = false)
@@ -241,7 +221,6 @@ public extension SettingsDictionary {
         case clangModulesValidateSystemHeaders(_ bool: Bool = false)
         case clangModuleCachePath(_ path: Path)
         case clangModuleLSV(_ bool: Bool = false)
-        case clangOBJCMigrateDir(_ path: Path)
         case clangOptimizationProfileFile(_ path: Path = "$(SRCROOT)/OptimizationProfiles/$(PROJECT_NAME).profdata")
         case clangOtherPrefixMappings(_ values: [String] = [])
         case clangRetainCommentsFromSystemHeaders(_ bool: Bool = false)
@@ -309,6 +288,7 @@ public extension SettingsDictionary {
         case clangWarnSuspiciousMove(_ bool: Bool = false)
         case clangWarnUnguardedAvailability(_ value: ClangWarnUnguardedAvailabilityValue = .yes)
         case clangWarnUnreachableCode(_ value: ClangWarnUnreachableCodeValue = .no)
+        case clangWarnUnsafeBufferUsage(_ bool: Bool = false)
         case clangWarnVexingParse(_ value: ClangWarnVexingParseValue = .yes)
         case clangWarnXNUTypedAllocators(_ value: ClangWarnXnuTypedAllocatorsValue = .Default)
         case clangWarnARCBridgeCastNONARC(_ bool: Bool = true)
@@ -368,7 +348,7 @@ public extension SettingsDictionary {
         case cppHeadermapFileForGeneratedFiles(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME)-generated-files.hmap")
         case cppHeadermapFileForOwnTargetHeaders(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME)-own-target-headers.hmap")
         case cppHeadermapFileForProjectFiles(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME)-project-headers.hmap")
-        case cppHeadermapProductHeadersVFSFile(_ path: Path = "$(PROJECT_TEMP_DIR)/all-product-headers.yaml")
+        case cppHeadermapProductHeadersVFSFile(_ path: Path = "$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME)-$(PROJECT_GUID)-VFS$(EFFECTIVE_PLATFORM_NAME)/all-product-headers.yaml")
         case cppHeaderSYMLINKSDir(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME).hdrs")
         case cppOtherPreprocessorFlags(_ values: [String])
         case cppPreprocessorDefinitions(_ values: [String])
@@ -441,6 +421,7 @@ public extension SettingsDictionary {
         case doHeaderScanningInJam(_ bool: Bool = false)
         case dstroot(_ path: Path = "/tmp/$(PROJECT_NAME).dst")
         case dsymUtilDSYMSearchPaths(_ values: [String] = [])
+        case dsymUtilQuietOperation(_ bool: Bool = false)
         case dsymUtilVariantSuffix(_ value: String = "")
         case dsymUtilVerbose(_ bool: Bool = false)
         case dtraceOtherFlags(_ values: [String] = [])
@@ -451,6 +432,7 @@ public extension SettingsDictionary {
         case dylibCompatibilityVersion(_ value: String = "")
         case dylibCurrentVersion(_ value: String = "")
         case dylibInstallNameBase(_ value: String = "")
+        case eagerCompilationAllowScripts(_ bool: Bool = false)
         /// If enabled, the build system will emit a TBD file for Swift-only framework and dynamic library targets to unblock linking of dependent targets before their dependency has finished linking.
         case eagerLinking(_ bool: Bool = false)
         case embeddedContentContainsSwift(_ bool: Bool = false)
@@ -459,9 +441,12 @@ public extension SettingsDictionary {
         case enableAppintentsDeploymentAwareProcessing(_ bool: Bool = true)
         case enableAppleKEXTCodeGeneration(_ bool: Bool = false)
         case enableAppSandbox(_ bool: Bool = false)
+        case enableAssistantIntentsProviderValidation(_ bool: Bool = true)
         case enableBitcode(_ bool: Bool = false)
         /// Enables building with code coverage instrumentation. This is only used when the build has code coverage enabled, which is typically done via the Xcode scheme or test plan settings.
         case enableCodeCoverage(_ bool: Bool = true)
+        /// If enabled, debug builds of app and app extension targets on supported platforms and SDKs will be built with the main binary code in a separate "NAME.debug.dylib". A stub executor that loads the dylib will be the main binary. Enabling this setting is required for the previews execution engine and other modern development features to work. You can disable this setting if your target is not compatible.
+        case enableDebugDYLIB(_ bool: Bool)
         case enableDefaultHeaderSearchPaths(_ bool: Bool = true)
         case enableDefaultSearchPaths(_ bool: Bool = false)
         /// Enable hardened runtime restrictions.
@@ -475,9 +460,9 @@ public extension SettingsDictionary {
         case enableOnlyActiveResources(_ bool: Bool = true)
         /// If enabled, tagged assets—files and asset catalog entries—are built into asset packs based on their combination of tags. Untagged resources are treated normally.
         case enableOnDemandResources(_ bool: Bool = false)
-        /// If enabled, the product will be built with options appropriate for supporting previews.
         case enablePreviews(_ bool: Bool)
         case enableStrictOBJCMSGSEND(_ bool: Bool = false)
+        case enableSwift6UpcomingFeaturesInSwiftVersion60(_ bool: Bool = true)
         case enableSystemSanitizers(_ bool: Bool)
         /// Enabling this setting will build the target with options appropriate for running automated tests against its product.
         ///
@@ -490,9 +475,8 @@ public extension SettingsDictionary {
         /// * `-export_dynamic` is passed to the linker.
         /// * `STRIP_INSTALLED_PRODUCT` is disabled (`strip` will not be run on the produced binary).
         case enableTestability(_ bool: Bool = false)
-        /// Specifies whether the build system should add the search paths necessary for compiling and linking against XCTest. This setting is enabled by default if the target is a unit test target or if the target explicitly links to the XCTest framework.
+        /// Specifies whether the build system should add the search paths necessary for compiling and linking against testing-related libraries or frameworks. This setting is enabled by default if the target is a test target or if the target explicitly links to the Testing, XCTest, or StoreKitTest frameworks.
         case enableTestingSearchPaths(_ bool: Bool = false)
-        case enableUSDZCompilation(_ bool: Bool = false)
         /// If enabled, the build system will sandbox user scripts to disallow undeclared input/output dependencies.
         case enableUserScriptSandboxing(_ bool: Bool = false)
         case enableUserSelectedFiles(_ value: EnableUserSelectedFilesValue = .empty)
@@ -634,6 +618,7 @@ public extension SettingsDictionary {
         case headermapIncludesFlatEntriesForTargetBeingBuilt(_ bool: Bool = true)
         /// Specifies whether the header map contains a framework-name/path entry for every header in the target being built, including targets that do not build frameworks.
         case headermapIncludesFrameworkEntriesForAllProductTypes(_ bool: Bool = true)
+        case headermapIncludesFrameworkEntriesForTargetsNotBeingBuilt(_ bool: Bool = true)
         case headermapIncludesNonpublicNonprivateHeaders(_ bool: Bool = false)
         /// Specifies whether the header map contains a name/path entry for every header in the project, regardless of the headers’ target membership.
         case headermapIncludesProjectHeaders(_ bool: Bool = true)
@@ -677,6 +662,8 @@ public extension SettingsDictionary {
         case iigHeadersDir(_ value: String = "$(IIG_DERIVED_FILE_DIR)")
         case iigImplementationDir(_ value: String = "$(IIG_DERIVED_FILE_DIR)")
         case iigPreprocessorDefinitions(_ values: [String] = ["__IIG=1"])
+        /// The domain in which the target will match or be matched for implicit dependencies. An implicit dependency will only be established between two targets if they are both in the same domain.
+        case implicitDependencyDomain(_ value: String = "default")
         case includedRecursiveSearchPathSubdirectories(_ values: [String] = [])
         case includedSourceFileNames(_ values: [String] = [])
         case infoplistEnableCfbundleiconsMerge(_ bool: Bool = true)
@@ -686,6 +673,10 @@ public extension SettingsDictionary {
         case infoPlistKeyCFBundleDisplayName(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [CLKComplicationPrincipalClass](https://developer.apple.com/documentation/bundleresources/information_property_list/clkcomplicationprincipalclass) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyCLKComplicationPrincipalClass(_ value: String)
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the GCSupportsControllerUserInteraction key in the `Info.plist` file to the value of this build setting.
+        case infoPlistKeyGCSupportsControllerUserInteraction(_ bool: Bool)
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the GCSupportsGameMode key in the `Info.plist` file to the value of this build setting.
+        case infoPlistKeyGCSupportsGameMode(_ bool: Bool)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSApplicationCategoryType](https://developer.apple.com/documentation/bundleresources/information_property_list/lsapplicationcategorytype) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyLSApplicationCategoryType(_ value: InfoplistKeyLsapplicationcategorytypeValue)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [LSBackgroundOnly](https://developer.apple.com/documentation/bundleresources/information_property_list/lsbackgroundonly) key in the `Info.plist` file to the value of this build setting.
@@ -742,6 +733,8 @@ public extension SettingsDictionary {
         case infoPlistKeyNSHomeKitUsageDescription(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSHumanReadableCopyright](https://developer.apple.com/documentation/bundleresources/information_property_list/nshumanreadablecopyright) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSHumanReadableCopyright(_ value: String)
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSIdentityUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nsidentityusagedescription) key in the `Info.plist` file to the value of this build setting.
+        case infoPlistKeyNSIdentityUsageDescription(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocalNetworkUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocalnetworkusagedescription) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyNSLocalNetworkUsageDescription(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [NSLocationAlwaysAndWhenInUseUsageDescription](https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysandwheninuseusagedescription) key in the `Info.plist` file to the value of this build setting.
@@ -838,6 +831,8 @@ public extension SettingsDictionary {
         case infoPlistKeyWKExtensionDelegateClassName(_ value: String)
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKRunsIndependentlyOfCompanionApp](https://developer.apple.com/documentation/bundleresources/information_property_list/wkrunsindependentlyofcompanionapp) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyWKRunsIndependentlyOfCompanionApp(_ bool: Bool)
+        /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the WKSupportsLiveActivityLaunchAttributeTypes key in the `Info.plist` file to the value of this build setting.
+        case infoPlistKeyWKSupportsLiveActivityLaunchAttributeTypes(_ values: [String])
         /// When `GENERATE_INFOPLIST_FILE` is enabled, sets the value of the [WKWatchOnly](https://developer.apple.com/documentation/bundleresources/information_property_list/wkwatchonly) key in the `Info.plist` file to the value of this build setting.
         case infoPlistKeyWKWatchOnly(_ bool: Bool)
         case infoplistOtherPreprocessorFlags(_ values: [String] = [])
@@ -893,11 +888,12 @@ public extension SettingsDictionary {
         case launchConstraintSelf(_ value: String = "")
         case ldAdditionalDeploymentTargetFlags(_ values: [String])
         case ldBitcodeGenerationMode(_ value: LdBitcodeGenerationModeValue)
+        case ldClientName(_ value: String)
         case ldDebugVariant(_ bool: Bool = true)
         case ldDependencyInfoFile(_ path: Path = "$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/$(CURRENT_ARCH)/$(PRODUCT_NAME)_dependency_info.dat")
         case ldDeterministicMode(_ bool: Bool = true)
         case ldDontRunDeduplication(_ bool: Bool = true)
-        case ldDYLIBAllowableClients(_ values: [String] = ["$(ALLOWABLE_CLIENTS)"])
+        case ldDYLIBAllowableClients(_ values: [String] = [])
         case ldDYLIBInstallName(_ path: Path = "")
         case ldEntitlementsSection(_ value: String = "")
         case ldEntitlementsSectionDer(_ value: String = "")
@@ -918,11 +914,14 @@ public extension SettingsDictionary {
         case ldOptimizationLevel(_ value: String = "$(GCC_OPTIMIZATION_LEVEL)")
         case ldQuoteLinkerArgumentsForCompilerDriver(_ bool: Bool = true)
         case ldRunpathSearchPaths(_ paths: [Path] = [])
+        case ldSharedCacheEligible(_ value: LdSharedCacheEligibleValue = .automatic)
         case ldSuppressWarnings(_ bool: Bool = false)
         case ldTargetTripleArchs(_ values: [String] = ["$(CURRENT_ARCH)"])
         case ldTargetTripleVariants(_ values: [String])
         case ldThreadSanitizer(_ bool: Bool = false)
         case ldVerifyBitcode(_ bool: Bool = true)
+        case ldWarnDuplicateLibraries(_ bool: Bool = false)
+        case ldWarnUnusedDylibs(_ bool: Bool = false)
         case lex(_ path: Path = "lex")
         case lexFlags(_ values: [String] = [])
         case lexCaseInsensitiveScanner(_ bool: Bool = false)
@@ -955,17 +954,22 @@ public extension SettingsDictionary {
         case llvmTargetTripleSuffix(_ value: String = "")
         case llvmTargetTripleVendor(_ value: String = "apple")
         case lmAuxConstMetadataListPath(_ path: Path = "$(LM_AUX_CONST_METADATA_LIST_PATH_$(variant)_$(arch))")
+        case lmAuxIntentsMetadataFilesListPath(_ path: Path = "$(TEMP_DIR)/$(PRODUCT_NAME).DependencyMetadataFileList")
         case lmBinaryPath(_ value: String = "")
         case lmCompileTimeExtraction(_ bool: Bool = true)
         case lmDependencyFiles(_ values: [String] = [])
         case lmEnableAppNameOverride(_ bool: Bool = false)
+        case lmEnableAssistantIntentAppNameOverride(_ bool: Bool = false)
         case lmEnableLinkGeneration(_ bool: Bool = true)
         case lmEnableStringValidation(_ bool: Bool = true)
         case lmForceLinkGeneration(_ bool: Bool = false)
+        case lmForceMetadataOutput(_ bool: Bool = false)
         case lmIgnoreQueryGenericsErrors(_ bool: Bool = false)
-        case lmLegacyExtractionOverride(_ bool: Bool = true)
+        case lmIntentsMetadataFilesListPath(_ values: [String])
+        case lmLegacyExtractionOverride(_ bool: Bool = false)
         case lmSourceFileListPath(_ values: [String])
         case lmStringsdataFiles(_ values: [String] = [])
+        case lmStringsFilePathList(_ values: [String])
         case lmSwiftConstValsListPath(_ values: [String])
         case localizableContentDir(_ path: Path = "")
         /// When enabled, localizable content in this target/project can be exported.
@@ -1038,6 +1042,10 @@ public extension SettingsDictionary {
         case mtlLanguageRevisionDialect(_ value: String = "$(MTL_LANGUAGE_REVISION_dialect_$(PLATFORM_NAME):default=ios)")
         case mtlLanguageRevisionDialectMacosx(_ value: String = "macos")
         case mtlLanguageRevisionOptgen(_ value: MtlLanguageRevisionOptgenValue)
+        case mtlMathFp32Functions(_ value: MtlMathFp32FunctionsValue)
+        case mtlMathFp32FunctionsDerivedNo(_ value: String = "PRECISE")
+        case mtlMathMode(_ value: MtlMathModeValue)
+        case mtlMathModeDerivedNo(_ value: String = "SAFE")
         case mtlOptimizationLevel(_ value: MtlOptimizationLevelValue = .Default)
         case mtlPreprocessorDefinitions(_ values: [String])
         case mtlTargetTriple(_ value: String = "air64-$(LLVM_TARGET_TRIPLE_VENDOR)-$(LLVM_TARGET_TRIPLE_OS_VERSION)$(LLVM_TARGET_TRIPLE_SUFFIX)")
@@ -1090,18 +1098,14 @@ public extension SettingsDictionary {
         case otherOSACompileFlags(_ values: [String] = [])
         case otherOSAFlags(_ values: [String] = [])
         case otherPrecompCFlags(_ values: [String] = [])
-        case otherRCProjectFlags(_ values: [String] = [])
-        case otherRealityAssetFlags(_ values: [String] = [])
         case otherRESMergerFlags(_ values: [String] = [])
         case otherREZFlags(_ values: [String] = [])
-        case otherSkyboxFlags(_ values: [String] = [])
         case otherSwiftABICheckerFlags(_ values: [String])
         /// A list of additional flags to pass to the Swift compiler.
         case otherSwiftFlags(_ values: [String])
         case otherSwiftSTDLibToolFlags(_ values: [String] = [])
         /// Options defined in this setting are passed to invocations of the `Text-Based InstallAPI` tool.
         case otherTAPIFlags(_ values: [String] = [])
-        case otherUSDZFlags(_ values: [String] = [])
         case outputformat(_ value: OutputformatValue = .none)
         /// Uniform type identifier. Identifies the type of the product the target builds. Some products may be made up of a single binary or archive. Others may comprise several files, which are grouped under a single directory. These container directories are known as *bundles*.
         case packageType(_ value: String = "")
@@ -1133,7 +1137,6 @@ public extension SettingsDictionary {
         case prefixReference(_ value: String = "")
         case prelinkFlags(_ values: [String] = [])
         case prelinkLibs(_ values: [String] = [])
-        case preserveDeadCodeInitsAndTerms(_ bool: Bool = false)
         case privateHeadersFolderPath(_ value: String = "")
         /// Path of the per-architecture, per-variant intermediate Info.plist after C preprocessing and/or variable expansion have been applied.
         case processedInfoplistPath(_ path: Path = "$(OBJECT_FILE_DIR)-$(CURRENT_VARIANT)/$(CURRENT_ARCH)/Processed-Info.plist")
@@ -1160,18 +1163,15 @@ public extension SettingsDictionary {
         case provisioningProfileSpecifier(_ value: String = "")
         case publicHeadersFolderPath(_ value: String = "")
         case pwd(_ value: String)
-        /// The Source-code language to use for generated RC objects.  By default Xcode will generate Swift types that represent the objects in your scene.  Adjust this setting to explicitly select "Swift", or select "None" to disable RC object generation.
-        case rcProjectCodegenLanguage(_ value: RcprojectCodegenLanguageValue = .swift)
-        case rcProjectCodegenSwiftVersion(_ value: String = "$(SWIFT_VERSION)")
-        case rcProjectEnableWarnings(_ value: RcprojectEnableWarningsValue = .yes)
         case realityAssetDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
-        case realityAssetEnableWarnings(_ value: RealityassetEnableWarningsValue = .yes)
         case recursiveSearchPathsFollowSYMLINKS(_ bool: Bool = true)
         case reexportedFrameworkInstallNames(_ values: [String])
         case reexportedFrameworkNames(_ values: [String])
         case reexportedLibraryInstallNames(_ paths: [Path])
         case reexportedLibraryNames(_ values: [String])
         case reexportedLibraryPaths(_ paths: [Path])
+        /// Strip any embedded USDZ files when compiling a Reference Object file.
+        case referenceobjectStripUSDZ(_ bool: Bool = false)
         case removeCVSFromResources(_ bool: Bool = true)
         case removeGitFromResources(_ bool: Bool = true)
         case removeHeadersFromEmbeddedBundles(_ bool: Bool = true)
@@ -1179,6 +1179,7 @@ public extension SettingsDictionary {
         case removeHGFromResources(_ bool: Bool = true)
         case removeStaticExecutablesFromEmbeddedBundles(_ bool: Bool = true)
         case removeSVNFromResources(_ bool: Bool = true)
+        case rescheduleIndependentHeadersPhases(_ bool: Bool = true)
         case resmergerSourcesFork(_ value: ResmergerSourcesForkValue = .auto)
         case resourcesPlatformName(_ value: String)
         case resourcesTargetedDeviceFamily(_ values: [String])
@@ -1227,7 +1228,6 @@ public extension SettingsDictionary {
         case sharedSupportFolderPath(_ path: Path = "")
         case shell(_ value: String)
         case skipInstall(_ bool: Bool = false)
-        case skyboxEnableWarnings(_ value: SkyboxEnableWarningsValue = .yes)
         case sourceRoot(_ path: Path = "$(SRCROOT)")
         /// Identifies the directory containing the target’s source files.
         case srcRoot(_ path: Path = ".")
@@ -1256,7 +1256,6 @@ public extension SettingsDictionary {
         case swiftActiveCompilationConditions(_ values: [String] = [])
         case swiftAddressSanitizer(_ bool: Bool = false)
         case swiftAddressSanitizerAllowErrorRecovery(_ bool: Bool = false)
-        case swiftAllowableClients(_ values: [String] = ["$(ALLOWABLE_CLIENTS:c99extidentifier)"])
         case swiftBitcodeGenerationMode(_ value: SwiftBitcodeGenerationModeValue)
         case swiftClangCXXLanguageStandard(_ value: String = "$(SWIFT_OBJC_INTEROP_MODE)-$(CLANG_CXX_LANGUAGE_STANDARD)")
         case swiftCompilationMode(_ value: SwiftCompilationModeValue = .singlefile)
@@ -1266,12 +1265,12 @@ public extension SettingsDictionary {
         case swiftDisableSafetyChecks(_ bool: Bool = false)
         case swiftEagerModuleEmissionInWMO(_ bool: Bool = true)
         /// A list of protocol names whose conformances the Swift compiler is to emit compile-time-known values for.
-        case swiftEmitConstValueProtocols(_ values: [String] = ["AppIntent", "EntityQuery", "AppEntity", "TransientEntity", "AppEnum", "AppShortcutProviding", "AppShortcutsProvider", "AnyResolverProviding", "AppIntentsPackage", "DynamicOptionsProvider"])
+        case swiftEmitConstValueProtocols(_ values: [String] = ["AppIntent", "EntityQuery", "AppEntity", "TransientEntity", "AppEnum", "AppShortcutProviding", "AppShortcutsProvider", "AnyResolverProviding", "AppIntentsPackage", "DynamicOptionsProvider", "_IntentValueRepresentable", "_AssistantIntentsProvider", "_GenerativeFunctionExtractable"])
         /// When enabled, the Swift compiler will be used to extract Swift string literal and interpolation `LocalizedStringKey` and `LocalizationKey` types during localization export.
         case swiftEmitLOCStrings(_ bool: Bool = false)
         case swiftEmitModuleInterface(_ bool: Bool = false)
         case swiftEnableAppExtension(_ bool: Bool = false)
-        /// Enable the use of forward slash regular-expression literal syntax (-enable-bare-slash-regex)
+        /// Enables the use of the forward slash syntax for regular-expressions (`/.../`). This is always enabled when in the Swift 6 language mode.
         case swiftEnableBareSlashRegex(_ bool: Bool = true)
         case swiftEnableBatchMode(_ bool: Bool = true)
         /// Emit the extracted compile-time known values from the Swift compiler (-emit-const-values)
@@ -1283,6 +1282,7 @@ public extension SettingsDictionary {
         /// Enforce exclusive access at run-time.
         case swiftEnforceExclusiveAccess(_ value: SwiftEnforceExclusiveAccessValue = .on)
         case swiftExec(_ path: Path = "swiftc")
+        case swiftExperimentalFeatureDebugDescriptionMacro(_ bool: Bool = true)
         /// A list of paths to be searched by the Swift compiler for additional Swift modules.
         case swiftIncludePaths(_ paths: [Path])
         case swiftIndexStoreEnable(_ bool: Bool = false)
@@ -1294,7 +1294,9 @@ public extension SettingsDictionary {
         case swiftLibrariesOnly(_ bool: Bool = false)
         case swiftLibraryPath(_ path: Path = "")
         case swiftLinkOBJCRuntime(_ bool: Bool = false)
-        case swiftMigrateCode(_ bool: Bool)
+        case swiftLTO(_ value: SwiftLtoValue = .no)
+        /// Automatically link frameworks and libraries that are referenced using `import`.
+        case swiftModulesAutolink(_ bool: Bool = true)
         case swiftModuleAliases(_ values: [String] = [])
         case swiftModuleName(_ value: String = "$(PRODUCT_MODULE_NAME)")
         /// Path to the header defining the Objective-C interfaces to be exposed in Swift.
@@ -1313,6 +1315,12 @@ public extension SettingsDictionary {
         case swiftResourceDir(_ path: Path)
         case swiftResponseFilePath(_ path: Path = "$(SWIFT_RESPONSE_FILE_PATH_$(variant)_$(arch))")
         case swiftSerializeDebuggingOptions(_ bool: Bool = true)
+        /// When enabled, does not automatically link any frameworks which are referenced using `import`.
+        case swiftSkipAutolinkingAllFrameworks(_ bool: Bool = false)
+        /// A list of framework names which should not be automatically linked when referenced using `import`.
+        case swiftSkipAutolinkingFrameworks(_ values: [String])
+        /// A list of library names which should not be automatically linked when referenced using `import`.
+        case swiftSkipAutolinkingLibraries(_ values: [String])
         case swiftSTDLib(_ value: String = "swiftCore")
         case swiftSTDLibToolAction(_ value: String)
         case swiftSTDLibToolCodeSignIdentity(_ value: String = "$(EXPANDED_CODE_SIGN_IDENTITY)")
@@ -1326,7 +1334,10 @@ public extension SettingsDictionary {
         case swiftSTDLibToolToolchains(_ paths: [Path] = ["$(EFFECTIVE_TOOLCHAINS_DIRS)"])
         case swiftSTDLibToolUnsignedDestinationDir(_ path: Path = "")
         case swiftSTDLibToolVerbosity(_ value: SwiftStdlibToolVerbosityValue = .verbose)
-        case swiftStrictConcurrency(_ value: SwiftStrictConcurrencyValue = .minimal)
+        /// Enables strict concurrency checking to produce warnings for possible data races. This is always 'complete' when in the Swift 6 language mode and produces errors instead of warnings.
+        case swiftStrictConcurrency(_ value: SwiftStrictConcurrencyValue)
+        case swiftStrictConcurrencyDefault(_ bool: Bool = false)
+        case swiftStrictConcurrencyInSwiftVersion60(_ bool: Bool = false)
         /// Don't emit any warnings.
         case swiftSuppressWarnings(_ bool: Bool = false)
         case swiftTargetTriple(_ value: String = "$(CURRENT_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$(SWIFT_DEPLOYMENT_TARGET)$(LLVM_TARGET_TRIPLE_SUFFIX)")
@@ -1335,6 +1346,31 @@ public extension SettingsDictionary {
         case swiftToolchainFlags(_ values: [String])
         /// Treat all warnings as errors.
         case swiftTreatWarningsAsErrors(_ bool: Bool = false)
+        case swiftUpcomingFeature60(_ bool: Bool = false)
+        /// Changes #file to evaluate to a string literal of the format `<module-name>/<file-name>`, with the existing behavior preserved in a new #filePath. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureConciseMagicFile(_ bool: Bool = false)
+        /// Causes any use of `@UIApplicationMain` or `@NSApplicationMain` to produce a warning (use `@main` instead). This is always enabled when in the Swift 6 language mode and an error instead of a warning.
+        case swiftUpcomingFeatureDeprecateApplicationMain(_ bool: Bool = false)
+        /// Removes inferred actor isolation inference from property wrappers. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureDisableOutwardActorIsolation(_ bool: Bool = false)
+        /// Changes existential types to require explicit annotation with the `any` keyword.
+        case swiftUpcomingFeatureExistentialAny(_ bool: Bool = false)
+        /// Updates trailing closures to be evaluated such that arguments are matched forwards instead of backwards. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureForwardTrailingClosures(_ bool: Bool = false)
+        /// Adds a warning for global variables that are neither isolated to a global actor or are not both immutable and Sendable. This is always enabled when in the Swift 6 language mode and an error instead of a warning.
+        case swiftUpcomingFeatureGlobalConcurrency(_ bool: Bool = false)
+        /// Enables passing an existential where a generic is expected. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureImplicitOpenExistentials(_ bool: Bool = false)
+        /// Synthesizes placeholder types to represent forward declared Objective-C interfaces and protocols. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureImportOBJCForwardDecls(_ bool: Bool = false)
+        /// Adds sendability inference for partial and unapplied methods, and allows specifying whether a key path literal is Sendable. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureInferSendableFromCaptures(_ bool: Bool = false)
+        /// Switches the default accessibility of module imports to `internal` rather than `public`.
+        case swiftUpcomingFeatureInternalImportsByDefault(_ bool: Bool = false)
+        /// Adds actor isolation for default values, matching its enclosing function or stored property. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureIsolatedDefaultValues(_ bool: Bool = false)
+        /// Enable passing non-Sendable values over isolation boundaries when there's no possibility of concurrent access. This is always enabled when in the Swift 6 language mode.
+        case swiftUpcomingFeatureRegionBasedIsolation(_ bool: Bool = false)
         case swiftUseParallelWholeModuleOptimization(_ bool: Bool = true)
         case swiftUseParallelWMOTargets(_ bool: Bool = true)
         case swiftValidateClangModulesOncePerBuildSession(_ bool: Bool = true)
@@ -1411,6 +1447,7 @@ public extension SettingsDictionary {
         case tapiReexportedLibraryNames(_ values: [String] = ["$(REEXPORTED_LIBRARY_NAMES)"])
         case tapiReexportedLibraryPaths(_ values: [String] = ["$(REEXPORTED_LIBRARY_PATHS)"])
         case tapiRunpathSearchPaths(_ paths: [Path] = ["$(LD_RUNPATH_SEARCH_PATHS)"])
+        case tapiSharedCacheEligible(_ value: TapiSharedCacheEligibleValue)
         case tapiSystemFrameworkSearchPaths(_ paths: [Path] = ["$(SYSTEM_FRAMEWORK_SEARCH_PATHS)"])
         case tapiSystemHeaderSearchPaths(_ paths: [Path] = ["$(SYSTEM_HEADER_SEARCH_PATHS)"])
         case tapiTargetTripleArchs(_ values: [String] = ["$(ARCHS)"])
@@ -1434,11 +1471,12 @@ public extension SettingsDictionary {
         case textureAtlasMaximumSize(_ value: TextureAtlasMaximumSizeValue = ._2048x2048)
         case toolchains(_ values: [String])
         case treatMissingBaselinesAsTestFailures(_ bool: Bool = false)
+        /// Enabling this option causes warnings about incremental build performance issues caused by script phases which are missing outputs, to be treated as errors.
+        case treatMissingScriptPhaseOutputsAsErrors(_ bool: Bool = false)
         case unexportedSymbolsFile(_ path: Path)
         case uninstalledProductsDir(_ path: Path = "$(TEMP_ROOT)/UninstalledProducts")
         case unlocalizedResourcesFolderPath(_ value: String)
         case unstrippedProduct(_ bool: Bool = false)
-        case usdzEnableWarnings(_ value: UsdzEnableWarningsValue = .yes)
         case user(_ value: String)
         case userHeaderSearchPaths(_ paths: [Path])
         case useDynamicNoPic(_ bool: Bool = true)
@@ -1462,7 +1500,6 @@ public extension SettingsDictionary {
         case versionInfoSuffix(_ value: String = "")
         case validateForStore(_ bool: Bool)
         case warningCFlags(_ values: [String] = [])
-        case warningLDFlags(_ values: [String] = [])
         case wrapperExtension(_ value: String = "")
         /// Specifies the filename, including the appropriate extension, of the product bundle.
         case wrapperName(_ value: String = "")
@@ -1472,7 +1509,7 @@ public extension SettingsDictionary {
         case wrapAssetPacksInSeparateDirectories(_ bool: Bool = false)
         case xcodeDeveloperDirPath(_ value: String)
         case xcstringsForceBuildAllStrings(_ bool: Bool = false)
-        case xcstringsLanguagesToCompile(_ values: [String] = ["[]"])
+        case xcstringsLanguagesToCompile(_ values: [String] = ["$(INSTALLLOC_LANGUAGE)"])
         case xibCompilerInfoplistContentFile(_ path: Path = "$(TARGET_TEMP_DIR)/$(InputFileRegionPathComponent)$(InputFileBase)-PartialInfo.plist")
         case xpcServicesFolderPath(_ path: Path = "$(CONTENTS_FOLDER_PATH)/XPCServices")
         case yacc(_ path: Path = "yacc")
@@ -1480,6 +1517,9 @@ public extension SettingsDictionary {
         case yaccGeneratedFileStem(_ value: YaccGeneratedFileStemValue = .standard)
         case yaccGenerateDebuggingDirectives(_ bool: Bool = false)
         case yaccInsertLineDirectives(_ bool: Bool = true)
+        /// Coordinates the build of the main module's modular dependencies via explicit tasks scheduled by the build system.
+        case ExperimentalSwiftExplicitModules(_ value: ExperimentalSwiftExplicitModulesValue)
+        case PrefixedSwiftVersion(_ value: String = "_$(SWIFT_VERSION)")
         case ExcludeDsStoreFiles(_ value: String)
         case ResolveSrcSymlinks(_ value: String)
         case arch(_ value: String)
@@ -1495,8 +1535,6 @@ public extension SettingsDictionary {
                     return ("ACTION", .string(value))
                 case .additionalSDKs(let value):
                     return ("ADDITIONAL_SDKS", .array(value))
-                case .allowableClients(let value):
-                    return ("ALLOWABLE_CLIENTS", .array(value))
                 case .allowTargetPlatformSpecialization(let value):
                     return ("ALLOW_TARGET_PLATFORM_SPECIALIZATION", .init(booleanLiteral: value))
                 case .allOtherLDFlags(let value):
@@ -1533,6 +1571,20 @@ public extension SettingsDictionary {
                     return ("APP_INTENTS_METADATA_PATH", .string(value))
                 case .appIntentsPlatformFamily(let value):
                     return ("APP_INTENTS_PLATFORM_FAMILY", .string(value))
+                case .appPlaygroundAssetCatalogGenerator(let value):
+                    return ("APP_PLAYGROUND_ASSET_CATALOG_GENERATOR", .string(value))
+                case .appPlaygroundGeneratedAssetCatalogAppiconName(let value):
+                    return ("APP_PLAYGROUND_GENERATED_ASSET_CATALOG_APPICON_NAME", .string(value))
+                case .appPlaygroundGeneratedAssetCatalogFile(let value):
+                    return ("APP_PLAYGROUND_GENERATED_ASSET_CATALOG_FILE", .string(value))
+                case .appPlaygroundGeneratedAssetCatalogGlobalAccentColorName(let value):
+                    return ("APP_PLAYGROUND_GENERATED_ASSET_CATALOG_GLOBAL_ACCENT_COLOR_NAME", .string(value))
+                case .appPlaygroundGeneratedAssetCatalogPlaceholderAppicon(let value):
+                    return ("APP_PLAYGROUND_GENERATED_ASSET_CATALOG_PLACEHOLDER_APPICON", .string(value))
+                case .appPlaygroundGeneratedAssetCatalogPresetAccentColor(let value):
+                    return ("APP_PLAYGROUND_GENERATED_ASSET_CATALOG_PRESET_ACCENT_COLOR", .string(value))
+                case .appPlaygroundGenerateAssetCatalog(let value):
+                    return ("APP_PLAYGROUND_GENERATE_ASSET_CATALOG", .init(booleanLiteral: value))
                 case .appShortcutsEnableFlexibleMatching(let value):
                     return ("APP_SHORTCUTS_ENABLE_FLEXIBLE_MATCHING", .init(booleanLiteral: value))
                 case .archs(let value):
@@ -1689,8 +1741,6 @@ public extension SettingsDictionary {
                     return ("CHMOD", .string(value))
                 case .chown(let value):
                     return ("CHOWN", .string(value))
-                case .clang(let value):
-                    return ("CLANG", .string(value))
                 case .clangAddressSanitizer(let value):
                     return ("CLANG_ADDRESS_SANITIZER", .init(booleanLiteral: value))
                 case .clangAddressSanitizerAllowErrorRecovery(let value):
@@ -1781,14 +1831,6 @@ public extension SettingsDictionary {
                     return ("CLANG_ANALYZER_SECURITY_KEYCHAIN_API", .init(booleanLiteral: value))
                 case .clangAnalyzerUseAfterMove(let value):
                     return ("CLANG_ANALYZER_USE_AFTER_MOVE", .string(value.rawValue))
-                case .clangARCMigrateDir(let value):
-                    return ("CLANG_ARC_MIGRATE_DIR", .string(value))
-                case .clangARCMigrateEmitError(let value):
-                    return ("CLANG_ARC_MIGRATE_EMIT_ERROR", .init(booleanLiteral: value))
-                case .clangARCMigratePrecheck(let value):
-                    return ("CLANG_ARC_MIGRATE_PRECHECK", .string(value.rawValue))
-                case .clangARCMigrateReportOutput(let value):
-                    return ("CLANG_ARC_MIGRATE_REPORT_OUTPUT", .string(value))
                 case .clangBitcodeGenerationMode(let value):
                     return ("CLANG_BITCODE_GENERATION_MODE", .string(value.rawValue))
                 case .clangColorDiagnostics(let value):
@@ -1801,6 +1843,8 @@ public extension SettingsDictionary {
                     return ("CLANG_CXX_LANGUAGE_STANDARD", .string(value.rawValue))
                 case .clangCXXLibrary(let value):
                     return ("CLANG_CXX_LIBRARY", .string(value.rawValue))
+                case .clangCXXStandardLibraryHardening(let value):
+                    return ("CLANG_CXX_STANDARD_LIBRARY_HARDENING", .string(value.rawValue))
                 case .clangDebugInformationLevel(let value):
                     return ("CLANG_DEBUG_INFORMATION_LEVEL", .string(value.rawValue))
                 case .clangDebugModules(let value):
@@ -1815,8 +1859,12 @@ public extension SettingsDictionary {
                     return ("CLANG_ENABLE_BOUNDS_SAFETY", .init(booleanLiteral: value))
                 case .clangEnableCodeCoverage(let value):
                     return ("CLANG_ENABLE_CODE_COVERAGE", .init(booleanLiteral: value))
+                case .clangEnableCplusplusTypedAllocatorSupport(let value):
+                    return ("CLANG_ENABLE_CPLUSPLUS_TYPED_ALLOCATOR_SUPPORT", .string(value.rawValue))
                 case .clangEnableCPPStaticDestructors(let value):
                     return ("CLANG_ENABLE_CPP_STATIC_DESTRUCTORS", .init(booleanLiteral: value))
+                case .clangEnableCTypedAllocatorSupport(let value):
+                    return ("CLANG_ENABLE_C_TYPED_ALLOCATOR_SUPPORT", .string(value.rawValue))
                 case .clangEnableExplicitModules(let value):
                     return ("CLANG_ENABLE_EXPLICIT_MODULES", .init(booleanLiteral: value))
                 case .clangEnableModules(let value):
@@ -1845,30 +1893,6 @@ public extension SettingsDictionary {
                     return ("CLANG_LINK_OBJC_RUNTIME", .init(booleanLiteral: value))
                 case .clangMacroBacktraceLimit(let value):
                     return ("CLANG_MACRO_BACKTRACE_LIMIT", .string(value))
-                case .clangMigratorAnnotations(let value):
-                    return ("CLANG_MIGRATOR_ANNOTATIONS", .init(booleanLiteral: value))
-                case .clangMigratorInstanceType(let value):
-                    return ("CLANG_MIGRATOR_INSTANCE_TYPE", .init(booleanLiteral: value))
-                case .clangMigratorNSEnumMacros(let value):
-                    return ("CLANG_MIGRATOR_NSENUM_MACROS", .init(booleanLiteral: value))
-                case .clangMigratorOBJCDesignatedInit(let value):
-                    return ("CLANG_MIGRATOR_OBJC_DESIGNATED_INIT", .init(booleanLiteral: value))
-                case .clangMigratorOBJCLiterals(let value):
-                    return ("CLANG_MIGRATOR_OBJC_LITERALS", .init(booleanLiteral: value))
-                case .clangMigratorOBJCSubscripting(let value):
-                    return ("CLANG_MIGRATOR_OBJC_SUBSCRIPTING", .init(booleanLiteral: value))
-                case .clangMigratorPropertyAtomicity(let value):
-                    return ("CLANG_MIGRATOR_PROPERTY_ATOMICITY", .string(value.rawValue))
-                case .clangMigratorPropertyDotSyntax(let value):
-                    return ("CLANG_MIGRATOR_PROPERTY_DOT_SYNTAX", .init(booleanLiteral: value))
-                case .clangMigratorProtocolConformance(let value):
-                    return ("CLANG_MIGRATOR_PROTOCOL_CONFORMANCE", .init(booleanLiteral: value))
-                case .clangMigratorPublicHeadersOnly(let value):
-                    return ("CLANG_MIGRATOR_PUBLIC_HEADERS_ONLY", .init(booleanLiteral: value))
-                case .clangMigratorReadonlyProperty(let value):
-                    return ("CLANG_MIGRATOR_READONLY_PROPERTY", .init(booleanLiteral: value))
-                case .clangMigratorReadwriteProperty(let value):
-                    return ("CLANG_MIGRATOR_READWRITE_PROPERTY", .init(booleanLiteral: value))
                 case .clangModulesAutolink(let value):
                     return ("CLANG_MODULES_AUTOLINK", .init(booleanLiteral: value))
                 case .clangModulesBuildSessionFile(let value):
@@ -1887,8 +1911,6 @@ public extension SettingsDictionary {
                     return ("CLANG_MODULE_CACHE_PATH", .string(value))
                 case .clangModuleLSV(let value):
                     return ("CLANG_MODULE_LSV", .init(booleanLiteral: value))
-                case .clangOBJCMigrateDir(let value):
-                    return ("CLANG_OBJC_MIGRATE_DIR", .string(value))
                 case .clangOptimizationProfileFile(let value):
                     return ("CLANG_OPTIMIZATION_PROFILE_FILE", .string(value))
                 case .clangOtherPrefixMappings(let value):
@@ -2021,6 +2043,8 @@ public extension SettingsDictionary {
                     return ("CLANG_WARN_UNGUARDED_AVAILABILITY", .string(value.rawValue))
                 case .clangWarnUnreachableCode(let value):
                     return ("CLANG_WARN_UNREACHABLE_CODE", .string(value.rawValue))
+                case .clangWarnUnsafeBufferUsage(let value):
+                    return ("CLANG_WARN_UNSAFE_BUFFER_USAGE", .init(booleanLiteral: value))
                 case .clangWarnVexingParse(let value):
                     return ("CLANG_WARN_VEXING_PARSE", .string(value.rawValue))
                 case .clangWarnXNUTypedAllocators(let value):
@@ -2245,6 +2269,8 @@ public extension SettingsDictionary {
                     return ("DSTROOT", .string(value))
                 case .dsymUtilDSYMSearchPaths(let value):
                     return ("DSYMUTIL_DSYM_SEARCH_PATHS", .array(value))
+                case .dsymUtilQuietOperation(let value):
+                    return ("DSYMUTIL_QUIET_OPERATION", .init(booleanLiteral: value))
                 case .dsymUtilVariantSuffix(let value):
                     return ("DSYMUTIL_VARIANT_SUFFIX", .string(value))
                 case .dsymUtilVerbose(let value):
@@ -2265,6 +2291,8 @@ public extension SettingsDictionary {
                     return ("DYLIB_CURRENT_VERSION", .string(value))
                 case .dylibInstallNameBase(let value):
                     return ("DYLIB_INSTALL_NAME_BASE", .string(value))
+                case .eagerCompilationAllowScripts(let value):
+                    return ("EAGER_COMPILATION_ALLOW_SCRIPTS", .init(booleanLiteral: value))
                 case .eagerLinking(let value):
                     return ("EAGER_LINKING", .init(booleanLiteral: value))
                 case .embeddedContentContainsSwift(let value):
@@ -2277,10 +2305,14 @@ public extension SettingsDictionary {
                     return ("ENABLE_APPLE_KEXT_CODE_GENERATION", .init(booleanLiteral: value))
                 case .enableAppSandbox(let value):
                     return ("ENABLE_APP_SANDBOX", .init(booleanLiteral: value))
+                case .enableAssistantIntentsProviderValidation(let value):
+                    return ("ENABLE_ASSISTANT_INTENTS_PROVIDER_VALIDATION", .init(booleanLiteral: value))
                 case .enableBitcode(let value):
                     return ("ENABLE_BITCODE", .init(booleanLiteral: value))
                 case .enableCodeCoverage(let value):
                     return ("ENABLE_CODE_COVERAGE", .init(booleanLiteral: value))
+                case .enableDebugDYLIB(let value):
+                    return ("ENABLE_DEBUG_DYLIB", .init(booleanLiteral: value))
                 case .enableDefaultHeaderSearchPaths(let value):
                     return ("ENABLE_DEFAULT_HEADER_SEARCH_PATHS", .init(booleanLiteral: value))
                 case .enableDefaultSearchPaths(let value):
@@ -2301,14 +2333,14 @@ public extension SettingsDictionary {
                     return ("ENABLE_PREVIEWS", .init(booleanLiteral: value))
                 case .enableStrictOBJCMSGSEND(let value):
                     return ("ENABLE_STRICT_OBJC_MSGSEND", .init(booleanLiteral: value))
+                case .enableSwift6UpcomingFeaturesInSwiftVersion60(let value):
+                    return ("ENABLE_SWIFT_6_UPCOMING_FEATURES_IN_SWIFT_VERSION_6_0", .init(booleanLiteral: value))
                 case .enableSystemSanitizers(let value):
                     return ("ENABLE_SYSTEM_SANITIZERS", .init(booleanLiteral: value))
                 case .enableTestability(let value):
                     return ("ENABLE_TESTABILITY", .init(booleanLiteral: value))
                 case .enableTestingSearchPaths(let value):
                     return ("ENABLE_TESTING_SEARCH_PATHS", .init(booleanLiteral: value))
-                case .enableUSDZCompilation(let value):
-                    return ("ENABLE_USDZ_COMPILATION", .init(booleanLiteral: value))
                 case .enableUserScriptSandboxing(let value):
                     return ("ENABLE_USER_SCRIPT_SANDBOXING", .init(booleanLiteral: value))
                 case .enableUserSelectedFiles(let value):
@@ -2547,6 +2579,8 @@ public extension SettingsDictionary {
                     return ("HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT", .init(booleanLiteral: value))
                 case .headermapIncludesFrameworkEntriesForAllProductTypes(let value):
                     return ("HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES", .init(booleanLiteral: value))
+                case .headermapIncludesFrameworkEntriesForTargetsNotBeingBuilt(let value):
+                    return ("HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_TARGETS_NOT_BEING_BUILT", .init(booleanLiteral: value))
                 case .headermapIncludesNonpublicNonprivateHeaders(let value):
                     return ("HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS", .init(booleanLiteral: value))
                 case .headermapIncludesProjectHeaders(let value):
@@ -2631,6 +2665,8 @@ public extension SettingsDictionary {
                     return ("IIG_IMPLEMENTATION_DIR", .string(value))
                 case .iigPreprocessorDefinitions(let value):
                     return ("IIG_PREPROCESSOR_DEFINITIONS", .array(value))
+                case .implicitDependencyDomain(let value):
+                    return ("IMPLICIT_DEPENDENCY_DOMAIN", .string(value))
                 case .includedRecursiveSearchPathSubdirectories(let value):
                     return ("INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES", .array(value))
                 case .includedSourceFileNames(let value):
@@ -2645,6 +2681,10 @@ public extension SettingsDictionary {
                     return ("INFOPLIST_KEY_CFBundleDisplayName", .string(value))
                 case .infoPlistKeyCLKComplicationPrincipalClass(let value):
                     return ("INFOPLIST_KEY_CLKComplicationPrincipalClass", .string(value))
+                case .infoPlistKeyGCSupportsControllerUserInteraction(let value):
+                    return ("INFOPLIST_KEY_GCSupportsControllerUserInteraction", .init(booleanLiteral: value))
+                case .infoPlistKeyGCSupportsGameMode(let value):
+                    return ("INFOPLIST_KEY_GCSupportsGameMode", .init(booleanLiteral: value))
                 case .infoPlistKeyLSApplicationCategoryType(let value):
                     return ("INFOPLIST_KEY_LSApplicationCategoryType", .string(value.rawValue))
                 case .infoPlistKeyLSBackgroundOnly(let value):
@@ -2701,6 +2741,8 @@ public extension SettingsDictionary {
                     return ("INFOPLIST_KEY_NSHomeKitUsageDescription", .string(value))
                 case .infoPlistKeyNSHumanReadableCopyright(let value):
                     return ("INFOPLIST_KEY_NSHumanReadableCopyright", .string(value))
+                case .infoPlistKeyNSIdentityUsageDescription(let value):
+                    return ("INFOPLIST_KEY_NSIdentityUsageDescription", .string(value))
                 case .infoPlistKeyNSLocalNetworkUsageDescription(let value):
                     return ("INFOPLIST_KEY_NSLocalNetworkUsageDescription", .string(value))
                 case .infoPlistKeyNSLocationAlwaysAndWhenInUseUsageDescription(let value):
@@ -2797,6 +2839,8 @@ public extension SettingsDictionary {
                     return ("INFOPLIST_KEY_WKExtensionDelegateClassName", .string(value))
                 case .infoPlistKeyWKRunsIndependentlyOfCompanionApp(let value):
                     return ("INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp", .init(booleanLiteral: value))
+                case .infoPlistKeyWKSupportsLiveActivityLaunchAttributeTypes(let value):
+                    return ("INFOPLIST_KEY_WKSupportsLiveActivityLaunchAttributeTypes", .array(value))
                 case .infoPlistKeyWKWatchOnly(let value):
                     return ("INFOPLIST_KEY_WKWatchOnly", .init(booleanLiteral: value))
                 case .infoplistOtherPreprocessorFlags(let value):
@@ -2891,6 +2935,8 @@ public extension SettingsDictionary {
                     return ("LD_ADDITIONAL_DEPLOYMENT_TARGET_FLAGS", .array(value))
                 case .ldBitcodeGenerationMode(let value):
                     return ("LD_BITCODE_GENERATION_MODE", .string(value.rawValue))
+                case .ldClientName(let value):
+                    return ("LD_CLIENT_NAME", .string(value))
                 case .ldDebugVariant(let value):
                     return ("LD_DEBUG_VARIANT", .init(booleanLiteral: value))
                 case .ldDependencyInfoFile(let value):
@@ -2941,6 +2987,8 @@ public extension SettingsDictionary {
                     return ("LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER", .init(booleanLiteral: value))
                 case .ldRunpathSearchPaths(let value):
                     return ("LD_RUNPATH_SEARCH_PATHS", .array(value))
+                case .ldSharedCacheEligible(let value):
+                    return ("LD_SHARED_CACHE_ELIGIBLE", .string(value.rawValue))
                 case .ldSuppressWarnings(let value):
                     return ("LD_SUPPRESS_WARNINGS", .init(booleanLiteral: value))
                 case .ldTargetTripleArchs(let value):
@@ -2951,6 +2999,10 @@ public extension SettingsDictionary {
                     return ("LD_THREAD_SANITIZER", .init(booleanLiteral: value))
                 case .ldVerifyBitcode(let value):
                     return ("LD_VERIFY_BITCODE", .init(booleanLiteral: value))
+                case .ldWarnDuplicateLibraries(let value):
+                    return ("LD_WARN_DUPLICATE_LIBRARIES", .init(booleanLiteral: value))
+                case .ldWarnUnusedDylibs(let value):
+                    return ("LD_WARN_UNUSED_DYLIBS", .init(booleanLiteral: value))
                 case .lex(let value):
                     return ("LEX", .string(value))
                 case .lexFlags(let value):
@@ -3015,6 +3067,8 @@ public extension SettingsDictionary {
                     return ("LLVM_TARGET_TRIPLE_VENDOR", .string(value))
                 case .lmAuxConstMetadataListPath(let value):
                     return ("LM_AUX_CONST_METADATA_LIST_PATH", .string(value))
+                case .lmAuxIntentsMetadataFilesListPath(let value):
+                    return ("LM_AUX_INTENTS_METADATA_FILES_LIST_PATH", .string(value))
                 case .lmBinaryPath(let value):
                     return ("LM_BINARY_PATH", .string(value))
                 case .lmCompileTimeExtraction(let value):
@@ -3023,20 +3077,28 @@ public extension SettingsDictionary {
                     return ("LM_DEPENDENCY_FILES", .array(value))
                 case .lmEnableAppNameOverride(let value):
                     return ("LM_ENABLE_APP_NAME_OVERRIDE", .init(booleanLiteral: value))
+                case .lmEnableAssistantIntentAppNameOverride(let value):
+                    return ("LM_ENABLE_ASSISTANT_INTENT_APP_NAME_OVERRIDE", .init(booleanLiteral: value))
                 case .lmEnableLinkGeneration(let value):
                     return ("LM_ENABLE_LINK_GENERATION", .init(booleanLiteral: value))
                 case .lmEnableStringValidation(let value):
                     return ("LM_ENABLE_STRING_VALIDATION", .init(booleanLiteral: value))
                 case .lmForceLinkGeneration(let value):
                     return ("LM_FORCE_LINK_GENERATION", .init(booleanLiteral: value))
+                case .lmForceMetadataOutput(let value):
+                    return ("LM_FORCE_METADATA_OUTPUT", .init(booleanLiteral: value))
                 case .lmIgnoreQueryGenericsErrors(let value):
                     return ("LM_IGNORE_QUERY_GENERICS_ERRORS", .init(booleanLiteral: value))
+                case .lmIntentsMetadataFilesListPath(let value):
+                    return ("LM_INTENTS_METADATA_FILES_LIST_PATH", .array(value))
                 case .lmLegacyExtractionOverride(let value):
                     return ("LM_LEGACY_EXTRACTION_OVERRIDE", .init(booleanLiteral: value))
                 case .lmSourceFileListPath(let value):
                     return ("LM_SOURCE_FILE_LIST_PATH", .array(value))
                 case .lmStringsdataFiles(let value):
                     return ("LM_STRINGSDATA_FILES", .array(value))
+                case .lmStringsFilePathList(let value):
+                    return ("LM_STRINGS_FILE_PATH_LIST", .array(value))
                 case .lmSwiftConstValsListPath(let value):
                     return ("LM_SWIFT_CONST_VALS_LIST_PATH", .array(value))
                 case .localizableContentDir(let value):
@@ -3169,6 +3231,14 @@ public extension SettingsDictionary {
                     return ("MTL_LANGUAGE_REVISION_dialect_macosx", .string(value))
                 case .mtlLanguageRevisionOptgen(let value):
                     return ("MTL_LANGUAGE_REVISION_optgen", .string(value.rawValue))
+                case .mtlMathFp32Functions(let value):
+                    return ("MTL_MATH_FP32_FUNCTIONS", .string(value.rawValue))
+                case .mtlMathFp32FunctionsDerivedNo(let value):
+                    return ("MTL_MATH_FP32_FUNCTIONS_derived_NO", .string(value))
+                case .mtlMathMode(let value):
+                    return ("MTL_MATH_MODE", .string(value.rawValue))
+                case .mtlMathModeDerivedNo(let value):
+                    return ("MTL_MATH_MODE_derived_NO", .string(value))
                 case .mtlOptimizationLevel(let value):
                     return ("MTL_OPTIMIZATION_LEVEL", .string(value.rawValue))
                 case .mtlPreprocessorDefinitions(let value):
@@ -3259,16 +3329,10 @@ public extension SettingsDictionary {
                     return ("OTHER_OSAFLAGS", .array(value))
                 case .otherPrecompCFlags(let value):
                     return ("OTHER_PRECOMP_CFLAGS", .array(value))
-                case .otherRCProjectFlags(let value):
-                    return ("OTHER_RCPROJECT_FLAGS", .array(value))
-                case .otherRealityAssetFlags(let value):
-                    return ("OTHER_REALITYASSET_FLAGS", .array(value))
                 case .otherRESMergerFlags(let value):
                     return ("OTHER_RESMERGERFLAGS", .array(value))
                 case .otherREZFlags(let value):
                     return ("OTHER_REZFLAGS", .array(value))
-                case .otherSkyboxFlags(let value):
-                    return ("OTHER_SKYBOX_FLAGS", .array(value))
                 case .otherSwiftABICheckerFlags(let value):
                     return ("OTHER_SWIFT_ABI_CHECKER_FLAGS", .array(value))
                 case .otherSwiftFlags(let value):
@@ -3277,8 +3341,6 @@ public extension SettingsDictionary {
                     return ("OTHER_SWIFT_STDLIB_TOOL_FLAGS", .array(value))
                 case .otherTAPIFlags(let value):
                     return ("OTHER_TAPI_FLAGS", .array(value))
-                case .otherUSDZFlags(let value):
-                    return ("OTHER_USDZ_FLAGS", .array(value))
                 case .outputformat(let value):
                     return ("OutputFormat", .string(value.rawValue))
                 case .packageType(let value):
@@ -3337,8 +3399,6 @@ public extension SettingsDictionary {
                     return ("PRELINK_FLAGS", .array(value))
                 case .prelinkLibs(let value):
                     return ("PRELINK_LIBS", .array(value))
-                case .preserveDeadCodeInitsAndTerms(let value):
-                    return ("PRESERVE_DEAD_CODE_INITS_AND_TERMS", .init(booleanLiteral: value))
                 case .privateHeadersFolderPath(let value):
                     return ("PRIVATE_HEADERS_FOLDER_PATH", .string(value))
                 case .processedInfoplistPath(let value):
@@ -3379,16 +3439,8 @@ public extension SettingsDictionary {
                     return ("PUBLIC_HEADERS_FOLDER_PATH", .string(value))
                 case .pwd(let value):
                     return ("PWD", .string(value))
-                case .rcProjectCodegenLanguage(let value):
-                    return ("RCPROJECT_CODEGEN_LANGUAGE", .string(value.rawValue))
-                case .rcProjectCodegenSwiftVersion(let value):
-                    return ("RCPROJECT_CODEGEN_SWIFT_VERSION", .string(value))
-                case .rcProjectEnableWarnings(let value):
-                    return ("RCPROJECT_ENABLE_WARNINGS", .string(value.rawValue))
                 case .realityAssetDeploymentTarget(let value):
                     return ("REALITYASSET_DEPLOYMENT_TARGET", .string(value))
-                case .realityAssetEnableWarnings(let value):
-                    return ("REALITYASSET_ENABLE_WARNINGS", .string(value.rawValue))
                 case .recursiveSearchPathsFollowSYMLINKS(let value):
                     return ("RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS", .init(booleanLiteral: value))
                 case .reexportedFrameworkInstallNames(let value):
@@ -3401,6 +3453,8 @@ public extension SettingsDictionary {
                     return ("REEXPORTED_LIBRARY_NAMES", .array(value))
                 case .reexportedLibraryPaths(let value):
                     return ("REEXPORTED_LIBRARY_PATHS", .array(value))
+                case .referenceobjectStripUSDZ(let value):
+                    return ("REFERENCEOBJECT_STRIP_USDZ", .init(booleanLiteral: value))
                 case .removeCVSFromResources(let value):
                     return ("REMOVE_CVS_FROM_RESOURCES", .init(booleanLiteral: value))
                 case .removeGitFromResources(let value):
@@ -3415,6 +3469,8 @@ public extension SettingsDictionary {
                     return ("REMOVE_STATIC_EXECUTABLES_FROM_EMBEDDED_BUNDLES", .init(booleanLiteral: value))
                 case .removeSVNFromResources(let value):
                     return ("REMOVE_SVN_FROM_RESOURCES", .init(booleanLiteral: value))
+                case .rescheduleIndependentHeadersPhases(let value):
+                    return ("RESCHEDULE_INDEPENDENT_HEADERS_PHASES", .init(booleanLiteral: value))
                 case .resmergerSourcesFork(let value):
                     return ("RESMERGER_SOURCES_FORK", .string(value.rawValue))
                 case .resourcesPlatformName(let value):
@@ -3499,8 +3555,6 @@ public extension SettingsDictionary {
                     return ("SHELL", .string(value))
                 case .skipInstall(let value):
                     return ("SKIP_INSTALL", .init(booleanLiteral: value))
-                case .skyboxEnableWarnings(let value):
-                    return ("SKYBOX_ENABLE_WARNINGS", .string(value.rawValue))
                 case .sourceRoot(let value):
                     return ("SOURCE_ROOT", .string(value))
                 case .srcRoot(let value):
@@ -3545,8 +3599,6 @@ public extension SettingsDictionary {
                     return ("SWIFT_ADDRESS_SANITIZER", .init(booleanLiteral: value))
                 case .swiftAddressSanitizerAllowErrorRecovery(let value):
                     return ("SWIFT_ADDRESS_SANITIZER_ALLOW_ERROR_RECOVERY", .init(booleanLiteral: value))
-                case .swiftAllowableClients(let value):
-                    return ("SWIFT_ALLOWABLE_CLIENTS", .array(value))
                 case .swiftBitcodeGenerationMode(let value):
                     return ("SWIFT_BITCODE_GENERATION_MODE", .string(value.rawValue))
                 case .swiftClangCXXLanguageStandard(let value):
@@ -3587,6 +3639,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_ENFORCE_EXCLUSIVE_ACCESS", .string(value.rawValue))
                 case .swiftExec(let value):
                     return ("SWIFT_EXEC", .string(value))
+                case .swiftExperimentalFeatureDebugDescriptionMacro(let value):
+                    return ("SWIFT_EXPERIMENTAL_FEATURE_DEBUG_DESCRIPTION_MACRO", .init(booleanLiteral: value))
                 case .swiftIncludePaths(let value):
                     return ("SWIFT_INCLUDE_PATHS", .array(value))
                 case .swiftIndexStoreEnable(let value):
@@ -3603,8 +3657,10 @@ public extension SettingsDictionary {
                     return ("SWIFT_LIBRARY_PATH", .string(value))
                 case .swiftLinkOBJCRuntime(let value):
                     return ("SWIFT_LINK_OBJC_RUNTIME", .init(booleanLiteral: value))
-                case .swiftMigrateCode(let value):
-                    return ("SWIFT_MIGRATE_CODE", .init(booleanLiteral: value))
+                case .swiftLTO(let value):
+                    return ("SWIFT_LTO", .string(value.rawValue))
+                case .swiftModulesAutolink(let value):
+                    return ("SWIFT_MODULES_AUTOLINK", .init(booleanLiteral: value))
                 case .swiftModuleAliases(let value):
                     return ("SWIFT_MODULE_ALIASES", .array(value))
                 case .swiftModuleName(let value):
@@ -3631,6 +3687,12 @@ public extension SettingsDictionary {
                     return ("SWIFT_RESPONSE_FILE_PATH", .string(value))
                 case .swiftSerializeDebuggingOptions(let value):
                     return ("SWIFT_SERIALIZE_DEBUGGING_OPTIONS", .init(booleanLiteral: value))
+                case .swiftSkipAutolinkingAllFrameworks(let value):
+                    return ("SWIFT_SKIP_AUTOLINKING_ALL_FRAMEWORKS", .init(booleanLiteral: value))
+                case .swiftSkipAutolinkingFrameworks(let value):
+                    return ("SWIFT_SKIP_AUTOLINKING_FRAMEWORKS", .array(value))
+                case .swiftSkipAutolinkingLibraries(let value):
+                    return ("SWIFT_SKIP_AUTOLINKING_LIBRARIES", .array(value))
                 case .swiftSTDLib(let value):
                     return ("SWIFT_STDLIB", .string(value))
                 case .swiftSTDLibToolAction(let value):
@@ -3659,6 +3721,10 @@ public extension SettingsDictionary {
                     return ("SWIFT_STDLIB_TOOL_VERBOSITY", .string(value.rawValue))
                 case .swiftStrictConcurrency(let value):
                     return ("SWIFT_STRICT_CONCURRENCY", .string(value.rawValue))
+                case .swiftStrictConcurrencyDefault(let value):
+                    return ("SWIFT_STRICT_CONCURRENCY_DEFAULT", .init(booleanLiteral: value))
+                case .swiftStrictConcurrencyInSwiftVersion60(let value):
+                    return ("SWIFT_STRICT_CONCURRENCY_IN_SWIFT_VERSION_6_0", .init(booleanLiteral: value))
                 case .swiftSuppressWarnings(let value):
                     return ("SWIFT_SUPPRESS_WARNINGS", .init(booleanLiteral: value))
                 case .swiftTargetTriple(let value):
@@ -3671,6 +3737,32 @@ public extension SettingsDictionary {
                     return ("SWIFT_TOOLCHAIN_FLAGS", .array(value))
                 case .swiftTreatWarningsAsErrors(let value):
                     return ("SWIFT_TREAT_WARNINGS_AS_ERRORS", .init(booleanLiteral: value))
+                case .swiftUpcomingFeature60(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_6_0", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureConciseMagicFile(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_CONCISE_MAGIC_FILE", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureDeprecateApplicationMain(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_DEPRECATE_APPLICATION_MAIN", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureDisableOutwardActorIsolation(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_DISABLE_OUTWARD_ACTOR_ISOLATION", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureExistentialAny(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureForwardTrailingClosures(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_FORWARD_TRAILING_CLOSURES", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureGlobalConcurrency(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureImplicitOpenExistentials(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_IMPLICIT_OPEN_EXISTENTIALS", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureImportOBJCForwardDecls(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_IMPORT_OBJC_FORWARD_DECLS", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureInferSendableFromCaptures(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_INFER_SENDABLE_FROM_CAPTURES", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureInternalImportsByDefault(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_INTERNAL_IMPORTS_BY_DEFAULT", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureIsolatedDefaultValues(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_ISOLATED_DEFAULT_VALUES", .init(booleanLiteral: value))
+                case .swiftUpcomingFeatureRegionBasedIsolation(let value):
+                    return ("SWIFT_UPCOMING_FEATURE_REGION_BASED_ISOLATION", .init(booleanLiteral: value))
                 case .swiftUseParallelWholeModuleOptimization(let value):
                     return ("SWIFT_USE_PARALLEL_WHOLE_MODULE_OPTIMIZATION", .init(booleanLiteral: value))
                 case .swiftUseParallelWMOTargets(let value):
@@ -3797,6 +3889,8 @@ public extension SettingsDictionary {
                     return ("TAPI_REEXPORTED_LIBRARY_PATHS", .array(value))
                 case .tapiRunpathSearchPaths(let value):
                     return ("TAPI_RUNPATH_SEARCH_PATHS", .array(value))
+                case .tapiSharedCacheEligible(let value):
+                    return ("TAPI_SHARED_CACHE_ELIGIBLE", .string(value.rawValue))
                 case .tapiSystemFrameworkSearchPaths(let value):
                     return ("TAPI_SYSTEM_FRAMEWORK_SEARCH_PATHS", .array(value))
                 case .tapiSystemHeaderSearchPaths(let value):
@@ -3839,6 +3933,8 @@ public extension SettingsDictionary {
                     return ("TOOLCHAINS", .array(value))
                 case .treatMissingBaselinesAsTestFailures(let value):
                     return ("TREAT_MISSING_BASELINES_AS_TEST_FAILURES", .init(booleanLiteral: value))
+                case .treatMissingScriptPhaseOutputsAsErrors(let value):
+                    return ("TREAT_MISSING_SCRIPT_PHASE_OUTPUTS_AS_ERRORS", .init(booleanLiteral: value))
                 case .unexportedSymbolsFile(let value):
                     return ("UNEXPORTED_SYMBOLS_FILE", .string(value))
                 case .uninstalledProductsDir(let value):
@@ -3847,8 +3943,6 @@ public extension SettingsDictionary {
                     return ("UNLOCALIZED_RESOURCES_FOLDER_PATH", .string(value))
                 case .unstrippedProduct(let value):
                     return ("UNSTRIPPED_PRODUCT", .init(booleanLiteral: value))
-                case .usdzEnableWarnings(let value):
-                    return ("USDZ_ENABLE_WARNINGS", .string(value.rawValue))
                 case .user(let value):
                     return ("USER", .string(value))
                 case .userHeaderSearchPaths(let value):
@@ -3895,8 +3989,6 @@ public extension SettingsDictionary {
                     return ("ValidateForStore", .init(booleanLiteral: value))
                 case .warningCFlags(let value):
                     return ("WARNING_CFLAGS", .array(value))
-                case .warningLDFlags(let value):
-                    return ("WARNING_LDFLAGS", .array(value))
                 case .wrapperExtension(let value):
                     return ("WRAPPER_EXTENSION", .string(value))
                 case .wrapperName(let value):
@@ -3927,6 +4019,10 @@ public extension SettingsDictionary {
                     return ("YACC_GENERATE_DEBUGGING_DIRECTIVES", .init(booleanLiteral: value))
                 case .yaccInsertLineDirectives(let value):
                     return ("YACC_INSERT_LINE_DIRECTIVES", .init(booleanLiteral: value))
+                case .ExperimentalSwiftExplicitModules(let value):
+                    return ("_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES", .string(value.rawValue))
+                case .PrefixedSwiftVersion(let value):
+                    return ("_PREFIXED_SWIFT_VERSION", .string(value))
                 case .ExcludeDsStoreFiles(let value):
                     return ("_exclude_ds_store_files_", .string(value))
                 case .ResolveSrcSymlinks(let value):
@@ -4034,11 +4130,6 @@ public extension SettingsDictionary {
         case no = "NO"
     }
 
-    enum ClangArcMigratePrecheckValue: String {
-        case donothing = "donothing"
-        case precheck = "precheck"
-    }
-
     enum ClangBitcodeGenerationModeValue: String {
         case none = "none"
         case marker = "marker"
@@ -4066,15 +4157,28 @@ public extension SettingsDictionary {
         case compilerDefault = "compiler-default"
     }
 
+    enum ClangCxxStandardLibraryHardeningValue: String {
+        case none = "none"
+        case fast = "fast"
+        case extensive = "extensive"
+        case debug = "debug"
+    }
+
     enum ClangDebugInformationLevelValue: String {
         case Default = "default"
         case lineTablesOnly = "line-tables-only"
     }
 
-    enum ClangMigratorPropertyAtomicityValue: String {
-        case nonatomic = "nonatomic"
-        case atomic = "atomic"
-        case nsNonatomicIosonly = "NS_NONATOMIC_IOSONLY"
+    enum ClangEnableCplusplusTypedAllocatorSupportValue: String {
+        case compilerDefault = "compiler-default"
+        case yes = "YES"
+        case no = "NO"
+    }
+
+    enum ClangEnableCTypedAllocatorSupportValue: String {
+        case compilerDefault = "compiler-default"
+        case yes = "YES"
+        case no = "NO"
     }
 
     enum ClangStaticAnalyzerModeValue: String {
@@ -4469,6 +4573,11 @@ public extension SettingsDictionary {
         case _2 = "2"
     }
 
+    enum LdSharedCacheEligibleValue: String {
+        case automatic = "Automatic"
+        case no = "NO"
+    }
+
     enum LlvmLtoValue: String {
         case yes = "YES"
         case yesThin = "YES_THIN"
@@ -4512,6 +4621,7 @@ public extension SettingsDictionary {
         case metal24 = "Metal24"
         case metal30 = "Metal30"
         case metal31 = "Metal31"
+        case metal32 = "Metal32"
     }
 
     enum MtlLanguageRevisionOptgenValue: String {
@@ -4524,6 +4634,19 @@ public extension SettingsDictionary {
         case metal22 = "Metal22"
         case metal23 = "Metal23"
         case metal24 = "Metal24"
+    }
+
+    enum MtlMathFp32FunctionsValue: String {
+        case uselanguagedefault = "UseLanguageDefault"
+        case fast = "FAST"
+        case precise = "PRECISE"
+    }
+
+    enum MtlMathModeValue: String {
+        case uselanguagedefault = "UseLanguageDefault"
+        case relaxed = "RELAXED"
+        case fast = "FAST"
+        case safe = "SAFE"
     }
 
     enum MtlOptimizationLevelValue: String {
@@ -4566,22 +4689,6 @@ public extension SettingsDictionary {
         case Binary = "Binary"
     }
 
-    enum RcprojectCodegenLanguageValue: String {
-        case swift = "Swift"
-        case automatic = "Automatic"
-        case none = "None"
-    }
-
-    enum RcprojectEnableWarningsValue: String {
-        case yes = "Yes"
-        case no = "No"
-    }
-
-    enum RealityassetEnableWarningsValue: String {
-        case yes = "Yes"
-        case no = "No"
-    }
-
     enum ResmergerSourcesForkValue: String {
         case data = "data"
         case resource = "resource"
@@ -4601,11 +4708,6 @@ public extension SettingsDictionary {
         case korean = "Korean"
         case simpchinese = "SimpChinese"
         case tradchinese = "TradChinese"
-    }
-
-    enum SkyboxEnableWarningsValue: String {
-        case yes = "Yes"
-        case no = "No"
     }
 
     enum StripStyleValue: String {
@@ -4628,6 +4730,12 @@ public extension SettingsDictionary {
         case on = "on"
         case debugOnly = "debug-only"
         case off = "off"
+    }
+
+    enum SwiftLtoValue: String {
+        case yes = "YES"
+        case yesThin = "YES_THIN"
+        case no = "NO"
     }
 
     enum SwiftObjcInteropModeValue: String {
@@ -4688,6 +4796,11 @@ public extension SettingsDictionary {
         case compilerDefault = "compiler-default"
     }
 
+    enum TapiSharedCacheEligibleValue: String {
+        case automatic = "Automatic"
+        case no = "NO"
+    }
+
     enum TapiVerifyModeValue: String {
         case errorsonly = "ErrorsOnly"
         case errorsandwarnings = "ErrorsAndWarnings"
@@ -4712,11 +4825,6 @@ public extension SettingsDictionary {
         case _4096x4096 = "4096x4096"
     }
 
-    enum UsdzEnableWarningsValue: String {
-        case yes = "Yes"
-        case no = "No"
-    }
-
     enum VersioningSystemValue: String {
         case empty = ""
         case appleGeneric = "apple-generic"
@@ -4726,6 +4834,11 @@ public extension SettingsDictionary {
     enum YaccGeneratedFileStemValue: String {
         case standard = "Standard"
         case inputfilestem = "InputFileStem"
+    }
+
+    enum ExperimentalSwiftExplicitModulesValue: String {
+        case yes = "YES"
+        case no = "NO"
     }
 
 }
