@@ -2,13 +2,14 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 16.0
+// Generated for Xcode version 16.0 Beta 3
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
         /// A string identifying the build system action being performed.
         case action(_ value: String = "")
         case additionalSDKs(_ values: [String] = [])
+        case allowBuildRequestOverrides(_ bool: Bool = false)
         /// If enabled, allows targets to build multiple times within a single build operation. Targets will build for the platform of the active run destination, as well as the platforms of any targets which depend on them.
         case allowTargetPlatformSpecialization(_ bool: Bool = false)
         case allOtherLDFlags(_ values: [String] = ["$(LD_FLAGS)", "$(SECTORDER_FLAGS)", "$(OTHER_LDFLAGS)", "$(OTHER_LDFLAGS_$(variant))", "$(OTHER_LDFLAGS_$(arch))", "$(OTHER_LDFLAGS_$(variant)_$(arch))", "$(PRODUCT_SPECIFIC_LDFLAGS)"])
@@ -18,6 +19,7 @@ public extension SettingsDictionary {
         case alternateMode(_ value: String = "$(INSTALL_MODE_FLAG)")
         case alternateOwner(_ value: String = "$(INSTALL_OWNER)")
         case alternatePermissionsFiles(_ values: [String] = [])
+        case alternativeDistributionWeb(_ bool: Bool = false)
         case alwaysEmbedSwiftStandardLibraries(_ bool: Bool = false)
         case alwaysSearchUserPaths(_ bool: Bool = true)
         case alwaysUseSeparateHeadermaps(_ bool: Bool = false)
@@ -363,6 +365,7 @@ public extension SettingsDictionary {
         case deadCodeStripping(_ bool: Bool = false)
         case debuggingSymbols(_ bool: Bool = true)
         case debugInformationFormat(_ value: DebugInformationFormatValue = .dwarf)
+        case debugInformationVersion(_ value: DebugInformationVersionValue = .compilerDefault)
         case defaultCompiler(_ value: String = "")
         case defaultDEXTInstallPath(_ value: String = "$(SYSTEM_DEXT_INSTALL_PATH)")
         case defaultKEXTInstallPath(_ value: String = "$(SYSTEM_KEXT_INSTALL_PATH)")
@@ -418,7 +421,6 @@ public extension SettingsDictionary {
         /// Identifies the directory that contains the bundle’s documentation files.
         case documentationFolderPath(_ path: Path = "")
         case dontGenerateInfoplistFile(_ bool: Bool = false)
-        case doHeaderScanningInJam(_ bool: Bool = false)
         case dstroot(_ path: Path = "/tmp/$(PROJECT_NAME).dst")
         case dsymUtilDSYMSearchPaths(_ values: [String] = [])
         case dsymUtilQuietOperation(_ bool: Bool = false)
@@ -517,6 +519,7 @@ public extension SettingsDictionary {
         case gccCWASMSyntax(_ bool: Bool = true)
         case gccCLanguageStandard(_ value: GccCLanguageStandardValue = .compilerDefault)
         case gccDebugInformationFormat(_ value: GccDebugInformationFormatValue)
+        case gccDebugInformationVersion(_ value: GccDebugInformationVersionValue)
         case gccDynamicNoPic(_ bool: Bool = false)
         case gccEnableASMKeyword(_ bool: Bool = true)
         case gccEnableBuiltinFunctions(_ bool: Bool = true)
@@ -536,7 +539,7 @@ public extension SettingsDictionary {
         case gccEnableSupplementalSSE3Instructions(_ bool: Bool = false)
         case gccEnableTrigraphs(_ bool: Bool = false)
         case gccFastMath(_ bool: Bool = false)
-        case gccGenerateDebuggingSymbols(_ bool: Bool)
+        case gccGenerateDebuggingSymbols(_ bool: Bool = true)
         case gccGenerateTestCoverageFiles(_ bool: Bool = false)
         case gccIncreasePrecompiledHeaderSharing(_ bool: Bool = false)
         /// When enabled, out-of-line copies of inline methods are declared `private extern`.
@@ -962,6 +965,7 @@ public extension SettingsDictionary {
         case lmEnableAssistantIntentAppNameOverride(_ bool: Bool = false)
         case lmEnableLinkGeneration(_ bool: Bool = true)
         case lmEnableStringValidation(_ bool: Bool = true)
+        case lmFilterWarnings(_ bool: Bool = false)
         case lmForceLinkGeneration(_ bool: Bool = false)
         case lmForceMetadataOutput(_ bool: Bool = false)
         case lmIgnoreQueryGenericsErrors(_ bool: Bool = false)
@@ -995,6 +999,7 @@ public extension SettingsDictionary {
         case mapcModule(_ value: String = "$(PRODUCT_MODULE_NAME)")
         case mapcNoWarnings(_ bool: Bool = false)
         case marketingVersion(_ value: String = "")
+        case marketplaces(_ values: [String])
         case mergeableLibrary(_ bool: Bool = false)
         case mergedBinaryType(_ value: MergedBinaryTypeValue = .none)
         case mergeLinkedLibraries(_ bool: Bool = false)
@@ -1121,7 +1126,6 @@ public extension SettingsDictionary {
         case pbxcpStripSubpaths(_ values: [String] = [])
         case pbxcpStripTool(_ path: Path = "")
         case pbxcpStripUnsignedBinaries(_ bool: Bool = false)
-        case perStyleBuildDirectories(_ bool: Bool = true)
         case pfeFileCDialects(_ values: [String] = [])
         case pkginfoPath(_ path: Path = "")
         case platformName(_ value: String)
@@ -1130,7 +1134,7 @@ public extension SettingsDictionary {
         case pluginsFolderPath(_ path: Path = "")
         case precompilePrefixHeader(_ bool: Bool = false)
         case precompsIncludeHeadersFromBuiltProductsDir(_ bool: Bool = true)
-        case precompDestinationDir(_ path: Path = "$(TARGET_TEMP_DIR)/PrefixHeaders")
+        case precompDestinationDir(_ value: String = "$(TEMP_DIR)/PrefixHeaders")
         case prefixCFlagBase(_ value: String = "")
         case prefixFlags(_ values: [String] = [])
         case prefixHeader(_ path: Path = "")
@@ -1260,6 +1264,8 @@ public extension SettingsDictionary {
         case swiftClangCXXLanguageStandard(_ value: String = "$(SWIFT_OBJC_INTEROP_MODE)-$(CLANG_CXX_LANGUAGE_STANDARD)")
         case swiftCompilationMode(_ value: SwiftCompilationModeValue = .singlefile)
         case swiftCrossModuleOptimization(_ bool: Bool = false)
+        case swiftDebugInformationFormat(_ value: SwiftDebugInformationFormatValue)
+        case swiftDebugInformationVersion(_ value: SwiftDebugInformationVersionValue)
         case swiftDeploymentTarget(_ value: String = "$($(DEPLOYMENT_TARGET_SETTING_NAME))")
         /// Disable runtime safety checks when optimizing.
         case swiftDisableSafetyChecks(_ bool: Bool = false)
@@ -1276,8 +1282,10 @@ public extension SettingsDictionary {
         /// Emit the extracted compile-time known values from the Swift compiler (-emit-const-values)
         case swiftEnableEmitConstValues(_ bool: Bool = true)
         case swiftEnableIncrementalCompilation(_ bool: Bool = true)
+        case swiftEnableLayoutStringValueWitnesses(_ bool: Bool = false)
         case swiftEnableLibraryEvolution(_ bool: Bool = false)
         case swiftEnableOpaqueTypeErasure(_ bool: Bool = true)
+        case swiftEnablePrefixMapping(_ bool: Bool)
         case swiftEnableTestability(_ bool: Bool = false)
         /// Enforce exclusive access at run-time.
         case swiftEnforceExclusiveAccess(_ value: SwiftEnforceExclusiveAccessValue = .on)
@@ -1306,6 +1314,7 @@ public extension SettingsDictionary {
         /// Determines whether Swift can interoperate with C++ in addition to Objective-C.
         case swiftOBJCInteropMode(_ value: SwiftObjcInteropModeValue = .objc)
         case swiftOptimizationLevel(_ value: SwiftOptimizationLevelValue = .o)
+        case swiftOtherPrefixMappings(_ values: [String] = [])
         /// An identifier that allows grouping of modules with access to symbols with a package access modifier.
         case swiftPackageName(_ value: String)
         case swiftPlatformTargetPrefix(_ value: String = "")
@@ -1340,7 +1349,7 @@ public extension SettingsDictionary {
         case swiftStrictConcurrencyInSwiftVersion60(_ bool: Bool = false)
         /// Don't emit any warnings.
         case swiftSuppressWarnings(_ bool: Bool = false)
-        case swiftTargetTriple(_ value: String = "$(CURRENT_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$(SWIFT_DEPLOYMENT_TARGET)$(LLVM_TARGET_TRIPLE_SUFFIX)")
+        case swiftTargetTriple(_ value: String = "$(CURRENT_ARCH)-$(LLVM_TARGET_TRIPLE_VENDOR)-$(SWIFT_PLATFORM_TARGET_PREFIX)$(SWIFT_DEPLOYMENT_TARGET)$(LLVM_TARGET_TRIPLE_SUFFIX)")
         case swiftTargetTripleVariants(_ values: [String])
         case swiftThreadSanitizer(_ bool: Bool = false)
         case swiftToolchainFlags(_ values: [String])
@@ -1535,6 +1544,8 @@ public extension SettingsDictionary {
                     return ("ACTION", .string(value))
                 case .additionalSDKs(let value):
                     return ("ADDITIONAL_SDKS", .array(value))
+                case .allowBuildRequestOverrides(let value):
+                    return ("ALLOW_BUILD_REQUEST_OVERRIDES", .init(booleanLiteral: value))
                 case .allowTargetPlatformSpecialization(let value):
                     return ("ALLOW_TARGET_PLATFORM_SPECIALIZATION", .init(booleanLiteral: value))
                 case .allOtherLDFlags(let value):
@@ -1551,6 +1562,8 @@ public extension SettingsDictionary {
                     return ("ALTERNATE_OWNER", .string(value))
                 case .alternatePermissionsFiles(let value):
                     return ("ALTERNATE_PERMISSIONS_FILES", .array(value))
+                case .alternativeDistributionWeb(let value):
+                    return ("ALTERNATIVE_DISTRIBUTION_WEB", .init(booleanLiteral: value))
                 case .alwaysEmbedSwiftStandardLibraries(let value):
                     return ("ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", .init(booleanLiteral: value))
                 case .alwaysSearchUserPaths(let value):
@@ -2171,6 +2184,8 @@ public extension SettingsDictionary {
                     return ("DEBUGGING_SYMBOLS", .init(booleanLiteral: value))
                 case .debugInformationFormat(let value):
                     return ("DEBUG_INFORMATION_FORMAT", .string(value.rawValue))
+                case .debugInformationVersion(let value):
+                    return ("DEBUG_INFORMATION_VERSION", .string(value.rawValue))
                 case .defaultCompiler(let value):
                     return ("DEFAULT_COMPILER", .string(value))
                 case .defaultDEXTInstallPath(let value):
@@ -2263,8 +2278,6 @@ public extension SettingsDictionary {
                     return ("DOCUMENTATION_FOLDER_PATH", .string(value))
                 case .dontGenerateInfoplistFile(let value):
                     return ("DONT_GENERATE_INFOPLIST_FILE", .init(booleanLiteral: value))
-                case .doHeaderScanningInJam(let value):
-                    return ("DO_HEADER_SCANNING_IN_JAM", .init(booleanLiteral: value))
                 case .dstroot(let value):
                     return ("DSTROOT", .string(value))
                 case .dsymUtilDSYMSearchPaths(let value):
@@ -2401,6 +2414,8 @@ public extension SettingsDictionary {
                     return ("GCC_C_LANGUAGE_STANDARD", .string(value.rawValue))
                 case .gccDebugInformationFormat(let value):
                     return ("GCC_DEBUG_INFORMATION_FORMAT", .string(value.rawValue))
+                case .gccDebugInformationVersion(let value):
+                    return ("GCC_DEBUG_INFORMATION_VERSION", .string(value.rawValue))
                 case .gccDynamicNoPic(let value):
                     return ("GCC_DYNAMIC_NO_PIC", .init(booleanLiteral: value))
                 case .gccEnableASMKeyword(let value):
@@ -3083,6 +3098,8 @@ public extension SettingsDictionary {
                     return ("LM_ENABLE_LINK_GENERATION", .init(booleanLiteral: value))
                 case .lmEnableStringValidation(let value):
                     return ("LM_ENABLE_STRING_VALIDATION", .init(booleanLiteral: value))
+                case .lmFilterWarnings(let value):
+                    return ("LM_FILTER_WARNINGS", .init(booleanLiteral: value))
                 case .lmForceLinkGeneration(let value):
                     return ("LM_FORCE_LINK_GENERATION", .init(booleanLiteral: value))
                 case .lmForceMetadataOutput(let value):
@@ -3141,6 +3158,8 @@ public extension SettingsDictionary {
                     return ("MAPC_NO_WARNINGS", .init(booleanLiteral: value))
                 case .marketingVersion(let value):
                     return ("MARKETING_VERSION", .string(value))
+                case .marketplaces(let value):
+                    return ("MARKETPLACES", .array(value))
                 case .mergeableLibrary(let value):
                     return ("MERGEABLE_LIBRARY", .init(booleanLiteral: value))
                 case .mergedBinaryType(let value):
@@ -3369,8 +3388,6 @@ public extension SettingsDictionary {
                     return ("PBXCP_STRIP_TOOL", .string(value))
                 case .pbxcpStripUnsignedBinaries(let value):
                     return ("PBXCP_STRIP_UNSIGNED_BINARIES", .init(booleanLiteral: value))
-                case .perStyleBuildDirectories(let value):
-                    return ("PER_STYLE_BUILD_DIRECTORIES", .init(booleanLiteral: value))
                 case .pfeFileCDialects(let value):
                     return ("PFE_FILE_C_DIALECTS", .array(value))
                 case .pkginfoPath(let value):
@@ -3607,6 +3624,10 @@ public extension SettingsDictionary {
                     return ("SWIFT_COMPILATION_MODE", .string(value.rawValue))
                 case .swiftCrossModuleOptimization(let value):
                     return ("SWIFT_CROSS_MODULE_OPTIMIZATION", .init(booleanLiteral: value))
+                case .swiftDebugInformationFormat(let value):
+                    return ("SWIFT_DEBUG_INFORMATION_FORMAT", .string(value.rawValue))
+                case .swiftDebugInformationVersion(let value):
+                    return ("SWIFT_DEBUG_INFORMATION_VERSION", .string(value.rawValue))
                 case .swiftDeploymentTarget(let value):
                     return ("SWIFT_DEPLOYMENT_TARGET", .string(value))
                 case .swiftDisableSafetyChecks(let value):
@@ -3629,10 +3650,14 @@ public extension SettingsDictionary {
                     return ("SWIFT_ENABLE_EMIT_CONST_VALUES", .init(booleanLiteral: value))
                 case .swiftEnableIncrementalCompilation(let value):
                     return ("SWIFT_ENABLE_INCREMENTAL_COMPILATION", .init(booleanLiteral: value))
+                case .swiftEnableLayoutStringValueWitnesses(let value):
+                    return ("SWIFT_ENABLE_LAYOUT_STRING_VALUE_WITNESSES", .init(booleanLiteral: value))
                 case .swiftEnableLibraryEvolution(let value):
                     return ("SWIFT_ENABLE_LIBRARY_EVOLUTION", .init(booleanLiteral: value))
                 case .swiftEnableOpaqueTypeErasure(let value):
                     return ("SWIFT_ENABLE_OPAQUE_TYPE_ERASURE", .init(booleanLiteral: value))
+                case .swiftEnablePrefixMapping(let value):
+                    return ("SWIFT_ENABLE_PREFIX_MAPPING", .init(booleanLiteral: value))
                 case .swiftEnableTestability(let value):
                     return ("SWIFT_ENABLE_TESTABILITY", .init(booleanLiteral: value))
                 case .swiftEnforceExclusiveAccess(let value):
@@ -3673,6 +3698,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_OBJC_INTEROP_MODE", .string(value.rawValue))
                 case .swiftOptimizationLevel(let value):
                     return ("SWIFT_OPTIMIZATION_LEVEL", .string(value.rawValue))
+                case .swiftOtherPrefixMappings(let value):
+                    return ("SWIFT_OTHER_PREFIX_MAPPINGS", .array(value))
                 case .swiftPackageName(let value):
                     return ("SWIFT_PACKAGE_NAME", .string(value))
                 case .swiftPlatformTargetPrefix(let value):
@@ -4395,6 +4422,12 @@ public extension SettingsDictionary {
         case dwarfWithDsym = "dwarf-with-dsym"
     }
 
+    enum DebugInformationVersionValue: String {
+        case compilerDefault = "compiler-default"
+        case dwarf4 = "dwarf4"
+        case dwarf5 = "dwarf5"
+    }
+
     enum DtraceOutputFileTypeValue: String {
         case header = "Header"
     }
@@ -4427,6 +4460,12 @@ public extension SettingsDictionary {
     enum GccDebugInformationFormatValue: String {
         case dwarf = "dwarf"
         case dwarfWithDsym = "dwarf-with-dsym"
+    }
+
+    enum GccDebugInformationVersionValue: String {
+        case compilerDefault = "compiler-default"
+        case dwarf4 = "dwarf4"
+        case dwarf5 = "dwarf5"
     }
 
     enum GccInputFiletypeValue: String {
@@ -4726,6 +4765,17 @@ public extension SettingsDictionary {
         case wholemodule = "wholemodule"
     }
 
+    enum SwiftDebugInformationFormatValue: String {
+        case dwarf = "dwarf"
+        case dwarfWithDsym = "dwarf-with-dsym"
+    }
+
+    enum SwiftDebugInformationVersionValue: String {
+        case compilerDefault = "compiler-default"
+        case dwarf4 = "dwarf4"
+        case dwarf5 = "dwarf5"
+    }
+
     enum SwiftEnforceExclusiveAccessValue: String {
         case on = "on"
         case debugOnly = "debug-only"
@@ -4867,3 +4917,4 @@ extension SettingsDictionary: ExpressibleByArrayLiteral {
     }
 
 }
+    
