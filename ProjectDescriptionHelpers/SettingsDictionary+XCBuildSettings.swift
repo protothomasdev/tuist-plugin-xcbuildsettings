@@ -2,7 +2,7 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 16.0 Beta 3
+// Generated for Xcode version 16.0 Beta 4
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
@@ -1429,7 +1429,7 @@ public extension SettingsDictionary {
         case tapiExtractAPIOutputDir(_ path: Path = "$(SYMBOL_GRAPH_EXTRACTOR_OUTPUT_BASE)/clang/$(TAPI_EXTRACT_API_TARGET_TRIPLE)")
         case tapiExtractAPISDKDBOutputPath(_ path: Path = "$(TAPI_EXTRACT_API_OUTPUT_DIR)/$(PRODUCT_NAME).sdkdb")
         case tapiExtractAPISearchPaths(_ values: [String] = [])
-        case tapiExtractAPISystemRoot(_ path: Path = "${SDKROOT}")
+        case tapiExtractAPISystemRoot(_ path: Path = "$(SDKROOT)")
         case tapiExtractAPITargetTriple(_ value: String = "$(CURRENT_ARCH)-$(LLVM_TARGET_TRIPLE_VENDOR)-$(LLVM_TARGET_TRIPLE_OS_VERSION)$(LLVM_TARGET_TRIPLE_SUFFIX)")
         /// Add private-level headers from other targets when building `Text-Based InstallAPI`.
         case tapiExtraPrivateHeaders(_ values: [String] = [])
