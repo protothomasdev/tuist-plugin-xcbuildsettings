@@ -2,7 +2,7 @@ import ProjectDescription
 
 public typealias Path = String
 
-// Generated for Xcode version 16.0 Beta 4
+// Generated for Xcode version 16.0
 public extension SettingsDictionary {
 
     enum XcodeBuildSetting {
@@ -401,6 +401,8 @@ public extension SettingsDictionary {
         case doccCatalogVersion(_ value: String = "$(CURRENT_PROJECT_VERSION:default=0)")
         case doccDiagnosticsFile(_ path: Path = "$(TARGET_TEMP_DIR)/$(DOCC_CATALOG_DISPLAY_NAME)-diagnostics.json")
         case doccEmitFixits(_ bool: Bool = true)
+        /// Include documentation for symbols defined in C++/Objective-C++ headers.
+        case doccEnableCXXSupport(_ bool: Bool = true)
         case doccExec(_ path: Path = "docc")
         /// Extract Swift symbol information for symbols defined within an extension to a type that is not defined in the current module.
         case doccExtractExtensionSymbols(_ bool: Bool = true)
@@ -1262,6 +1264,7 @@ public extension SettingsDictionary {
         case swiftAddressSanitizerAllowErrorRecovery(_ bool: Bool = false)
         case swiftBitcodeGenerationMode(_ value: SwiftBitcodeGenerationModeValue)
         case swiftClangCXXLanguageStandard(_ value: String = "$(SWIFT_OBJC_INTEROP_MODE)-$(CLANG_CXX_LANGUAGE_STANDARD)")
+        case swiftClangCXXStandardLibraryHardening(_ value: String = "$(CLANG_CXX_STANDARD_LIBRARY_HARDENING)")
         case swiftCompilationMode(_ value: SwiftCompilationModeValue = .singlefile)
         case swiftCrossModuleOptimization(_ bool: Bool = false)
         case swiftDebugInformationFormat(_ value: SwiftDebugInformationFormatValue)
@@ -2250,6 +2253,8 @@ public extension SettingsDictionary {
                     return ("DOCC_DIAGNOSTICS_FILE", .string(value))
                 case .doccEmitFixits(let value):
                     return ("DOCC_EMIT_FIXITS", .init(booleanLiteral: value))
+                case .doccEnableCXXSupport(let value):
+                    return ("DOCC_ENABLE_CXX_SUPPORT", .init(booleanLiteral: value))
                 case .doccExec(let value):
                     return ("DOCC_EXEC", .string(value))
                 case .doccExtractExtensionSymbols(let value):
@@ -3620,6 +3625,8 @@ public extension SettingsDictionary {
                     return ("SWIFT_BITCODE_GENERATION_MODE", .string(value.rawValue))
                 case .swiftClangCXXLanguageStandard(let value):
                     return ("SWIFT_CLANG_CXX_LANGUAGE_STANDARD", .string(value))
+                case .swiftClangCXXStandardLibraryHardening(let value):
+                    return ("SWIFT_CLANG_CXX_STANDARD_LIBRARY_HARDENING", .string(value))
                 case .swiftCompilationMode(let value):
                     return ("SWIFT_COMPILATION_MODE", .string(value.rawValue))
                 case .swiftCrossModuleOptimization(let value):
