@@ -4901,7 +4901,7 @@ public extension SettingsDictionary {
 }
 
 
-extension SettingsDictionary: ExpressibleByArrayLiteral {
+extension SettingsDictionary: @retroactive ExpressibleByArrayLiteral {
 
     public init(buildSettings: [XcodeBuildSetting]) {
         self.init()
